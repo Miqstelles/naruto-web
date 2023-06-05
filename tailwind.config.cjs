@@ -5,6 +5,10 @@ module.exports = {
     './index.html',
   ],
   theme: {
+    fontFamily: {
+      MPLUS1CODE: ["'M PLUS 1 Code'", 'sans-serif'],
+      Lexend: ["'Lexend'", 'sans-serif'],
+    },
     extend: {},
   },
   plugins: [],
