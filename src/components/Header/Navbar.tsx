@@ -13,9 +13,9 @@ export function Navbar(props: NavbarProps) {
 
     return (
         <>
-            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row' : 'flex'} justify-center items-center gap-[72px]`}>
+            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row ' : 'flex border-b-[2px]'} justify-center items-center gap-[72px] `}>
                 <button
-                    className={`${isOpen ? 'mt-[14px] ml-[20px]' : null}`}
+                    className={`w-[50px] h-[50px] ${isOpen ? 'mt-[14px] ml-[20px]' : null}`}
                     onClick={isOpen ? () => setOpen(false) : () => setOpen(true)}
                 >
                     <Squash color="#fff" size={40} />
@@ -26,14 +26,19 @@ export function Navbar(props: NavbarProps) {
                 <MagnifyingGlass color="#fff" size={40} className={`${isOpen ? 'hidden' : null}`} />
             </div>
             <motion.div
-                initial={{ opacity: 0, y: -40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}
-                className={`w-full h-[285px] bg-[#1E1D1D] absolute ${isOpen ? 'flex-row' : 'hidden'}`}
+                initial={{ opacity: 1, y: isOpen ? 0 : -40 }}
+                animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -40 }}
+                transition={{ duration: 0.4 }}
+                className={`w-full h-[285px] bg-[#1E1D1D] absolute ${isOpen ? null : 'mt-[40px]'}`}
             >
-                <ul className="font-MPLUS1CODE font-bold text-white text-[40px] ml-[20px] pt-[24px]">
-                    {props.items.map((item, index) => (
-                        <li key={index}><a href="">{item}</a></li>
-                    ))}
-                </ul>
+                {isOpen && (
+                    <ul className="font-MPLUS1CODE font-bold text-white text-[40px] ml-[20px] pt-[24px]">
+                        {props.items.map((item, index) => (
+                            <li key={index}><a href="">{item}</a></li>
+                        ))}
+                    </ul>
+                )}
+
             </motion.div>
         </>
 
