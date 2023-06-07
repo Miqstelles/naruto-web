@@ -31,6 +31,7 @@ export type Character = {
             "Part II": string;
             "Academy Graduate": string;
         };
+        status: string;
         height: {
             "Part I": string;
             "Part II": string;
