@@ -6,12 +6,14 @@ import Hokage from '../../assets/hokage.svg'
 import Raikage from '../../assets/raikage.svg'
 import Kazekage from '../../assets/kazekage.svg'
 import Mizukage from '../../assets/mizukage.svg'
+import { CharacterInfoImg } from '../CharacterInfoImg';
 
 export function CharacterCard() {
     const [characters, setCharacters] = useState<Character[]>([])
+    const randomPage = Math.floor(Math.random() * 250)
 
     useEffect(() => {
-        fetchCharacter('?page=1&limit=10')
+        fetchCharacter(`?page=${randomPage}&limit=5`)
             .then(response => setCharacters(response.data.characters))
             .catch(error => console.log(error));
     }, []);
@@ -19,6 +21,8 @@ export function CharacterCard() {
     return (
         <div className="grid gap-[20px]">
             {characters.map(character => {
+                const characterImg = character.images[character.images.length === 1 ? 0 : 1]?.replace(/\/revision\/.*$/, '')
+
                 const appearsLength = character && character.debut && character?.debut?.appearsIn?.length
 
                 const isAkatsuki = character && character.personal && character?.personal?.affiliation?.includes('Akatsuki') ?
@@ -27,22 +31,23 @@ export function CharacterCard() {
                     'text-white bg-gradient-to-r from-[#C9683C] via-[#DB8F6C] to-[#F07942]'
 
                 const bgCard = appearsLength && appearsLength >= 32 ? isAkatsuki : 'bg-white'
+
                 return (
                     <div key={character.id} className={`w-[330px] h-[219px] rounded-[5px] shadow-[5px] ${bgCard} relative`}>
                         {character.personal.affiliation?.includes('Akatsuki') ?
                             <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />
                             :
-                            character.personal.occupation?.includes('Hokage') ? <img src={Hokage} alt="Hokage Logo" title="Hokage" className="w-[74px] rotate-[-18.82deg] absolute mt-[-38px] ml-[-10px]" />
-                                : character.personal.occupation?.includes('Kazekage') ? <img src={Kazekage} alt="Kazekage Logo" title="Kazekage" className="w-[74px] rotate-[-18.82deg] absolute mt-[-38px] ml-[-10px]" /> :
-                                    character.personal.occupation?.includes('Raikage') ? <img src={Raikage} alt="Raikage Logo" title="Raikage" className="w-[74px] rotate-[-18.82deg] absolute mt-[-38px] ml-[-10px]" /> :
-                                        character.personal.occupation?.includes('Tsuchikage') ? <img src={Tsuchikage} alt="Tsuchikage Logo" title="Tsuchikage" className="w-[74px] rotate-[-18.82deg] absolute mt-[-38px] ml-[-10px]" /> :
-                                            character.personal.occupation?.includes('Mizukage') ? <img src={Mizukage} alt="Mizukage Logo" title="Mizukage" className="w-[74px] rotate-[-18.82deg] absolute mt-[-38px] ml-[-10px]" /> : null
+                            character.personal.occupation?.includes('Hokage') ? <CharacterInfoImg src={Hokage} alt="Hokage Logo" title="Hokage" />
+                                : character.personal.occupation?.includes('Kazekage') ? <CharacterInfoImg src={Kazekage} alt="Kazekage Logo" title="Kazekage" /> :
+                                    character.personal.occupation?.includes('Raikage') ? <CharacterInfoImg src={Raikage} alt="Raikage Logo" title="Raikage" /> :
+                                        character.personal.occupation?.includes('Tsuchikage') ? <CharacterInfoImg src={Tsuchikage} alt="Tsuchikage Logo" title="Tsuchikage" /> :
+                                            character.personal.occupation?.includes('Mizukage') ? <CharacterInfoImg src={Mizukage} alt="Mizukage Logo" title="Mizukage" /> : null
                         }
                         {character && (
                             <>
                                 <div
                                     className="w-[330px] h-[132px] rounded-t-[5px] bg-no-repeat bg-center bg-cover"
-                                    style={{ backgroundImage: `url(${character.images[character.images.length === 1 ? 0 : 1]?.replace(/\/revision\/.*$/, '')})` }}
+                                    style={{ backgroundImage: `url(${characterImg})` }}
                                 />
 
                                 <div className="grid gap-[20px] mt-[10px] mx-[14px]">
@@ -64,7 +69,7 @@ export function CharacterCard() {
 
                                     <div className="flex justify-between items-center">
                                         {character.personal.age ?
-                                            <p className="font-MPLUS1CODE"><span className="font-bold">Age: </span>{character.personal.age['Part II']}</p>
+                                            <p className="font-MPLUS1CODE"><span className="font-bold">Age: </span>{character.personal.age['Part II'] ? character.personal.age['Part II'] : character.personal.age['Part I']}</p>
                                             :
                                             <p>Age: Undefinded</p>
                                         }
@@ -76,7 +81,6 @@ export function CharacterCard() {
                                         }
                                     </div>
                                 </div>
-
                             </>
                         )
                         }
