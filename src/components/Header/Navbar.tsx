@@ -12,7 +12,7 @@ export function Navbar(props: NavbarProps) {
     const [isOpen, setOpen] = useState(false);
 
     return (
-        <>
+        <nav>
             <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row ' : 'flex border-b-[2px]'} justify-center items-center gap-[72px] `}>
                 <button
                     className={`w-[50px] h-[50px] ${isOpen ? 'mt-[14px] ml-[20px]' : null}`}
@@ -40,7 +40,7 @@ export function Navbar(props: NavbarProps) {
                 )}
 
             </motion.div>
-        </>
+        </nav>
 
     )
 }
