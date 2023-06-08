@@ -7,33 +7,45 @@ import Raikage from '../../assets/raikage.svg'
 import Kazekage from '../../assets/kazekage.svg'
 import Mizukage from '../../assets/mizukage.svg'
 import { CharacterInfoImg } from '../CharacterInfoImg';
+import { Skeleton } from '../Skeleton';
 
 export function CharacterCard() {
     const [characters, setCharacters] = useState<Character[]>([])
+    const [loading, setLoading] = useState(false)
     const randomPage = Math.floor(Math.random() * 250)
 
     useEffect(() => {
-        fetchCharacter(`?page=${randomPage}&limit=5`)
-            .then(response => setCharacters(response.data.characters))
-            .catch(error => console.log(error));
+        setLoading(true)
+        const timer = setTimeout(() => {
+            fetchCharacter(`?page=${randomPage}&limit=5`)
+                .then(response => setCharacters(response.data.characters))
+                .catch(error => console.log(error));
+            setLoading(false)
+        }, 1000);
+        setCharacters([])
+        return () => clearTimeout(timer);
     }, []);
 
     return (
         <div className="grid gap-[20px]">
-            {characters.map(character => {
+            {loading &&
+                Array.from(Array(5), (_, i) =>
+                    <Skeleton key={i} />
+                )
+            }
+
+            {!loading && characters.map(character => {
                 const characterImg = character.images[character.images.length === 1 ? 0 : 1]?.replace(/\/revision\/.*$/, '')
 
                 const appearsLength = character && character.debut && character?.debut?.appearsIn?.length
-
                 const isAkatsuki = character && character.personal && character?.personal?.affiliation?.includes('Akatsuki') ?
                     'text-white bg-gradient-to-r from-[#C93636] via-[#E17A7A] to-[#E13434]'
                     :
                     'text-white bg-gradient-to-r from-[#C9683C] via-[#DB8F6C] to-[#F07942]'
-
                 const bgCard = appearsLength && appearsLength >= 32 ? isAkatsuki : 'bg-white'
 
                 return (
-                    <div key={character.id} className={`w-[330px] h-[219px] rounded-[5px] !shadow-2xl ${bgCard} relative`}>
+                    <div key={character.id} className={`w-[330px] h-[219px] rounded-[5px] !shadow-2xl ${bgCard} relative transition-all duration-500`}>
                         {character.personal.affiliation?.includes('Akatsuki') ?
                             <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />
                             :
@@ -51,7 +63,6 @@ export function CharacterCard() {
                                 />
 
                                 <div className="grid gap-[20px] mt-[10px] mx-[14px]">
-
                                     <div className={`flex justify-between`}>
                                         <p className="font-MPLUS1CODE font-bold" title={character.name}>
                                             {character.name.length >= 16 ? character.name.substring(0, 10) + "..." : character.name}
@@ -84,7 +95,7 @@ export function CharacterCard() {
                             </>
                         )
                         }
-                    </div >
+                    </div>
                 )
             })}
         </div>
