@@ -45,7 +45,7 @@ export function CharacterCard() {
                 const bgCard = appearsLength && appearsLength >= 32 ? isAkatsuki : 'bg-white'
 
                 return (
-                    <div key={character.id} className={`w-[330px] h-[219px] rounded-[5px] !shadow-2xl ${bgCard} relative transition-all duration-500`}>
+                    <div key={character.id} title={character.name} className={`w-[330px] h-[219px] rounded-[5px] !shadow-2xl ${bgCard} duration-75 relative hover:scale-105`}>
                         {character.personal.affiliation?.includes('Akatsuki') ?
                             <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />
                             :
