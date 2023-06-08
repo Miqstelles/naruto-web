@@ -1,20 +1,31 @@
-import { Navbar } from "../../components/Header/Navbar";
+import { CharacterCard } from "../../components/Character Card/CharacterCard";
+import { Header } from "../../components/Header/Header";
+
 import narutochibi from '../../assets/narutochibi2.png'
-import banner from '../../assets/naruto-chibi.png'
+import { Footer } from "../../components/Footer";
 
 export function Home() {
     return (
-        <>
-            <div className="bg-[#343434] w-full h-[1000px]">
-                <Navbar
-                    items={['Characters', 'Clans', 'Akatsuki', 'Tailed Beasts']}
-                />
-                <img src={banner} alt="" className="w-full h-[155px]" />
-                <div className="flex flex-col justify-center items-center mt-[32px]">
-                    <img src={narutochibi} alt="Naruto Chibi" className="pb-[20px]" />
-                    <h1 className="font-MPLUS1CODE font-light text-white text-[1.5rem] text-center w-[336px]">Explore the world of naruto characters, clans, villages and more.</h1>
-                </div>
-            </div>
-        </>
+        <div className="bg-[#343434] w-full h-full">
+            <Header />
+
+            <main className="flex flex-col justify-center items-center mt-[32px]">
+                <article className="grid justify-center">
+                    <figure>
+                        <img src={narutochibi} alt="Naruto Chibi" className="pb-[20px] mx-auto" />
+                    </figure>
+
+                    <p className="font-MPLUS1CODE font-light text-white text-[1.5rem] text-center w-[336px]">Explore the world of naruto characters, clans, villages and more.</p>
+                </article>
+
+                <section className="grid justify-center w-full h-[1342px] bg-[#C9683C] mt-[52px] ">
+                    <div className="mt-[32px] grid">
+                        <CharacterCard />
+                    </div>
+                </section>
+            </main>
+
+            <Footer />
+        </div >
     )
 }
