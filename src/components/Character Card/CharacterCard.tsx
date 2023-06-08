@@ -33,7 +33,7 @@ export function CharacterCard() {
                 const bgCard = appearsLength && appearsLength >= 32 ? isAkatsuki : 'bg-white'
 
                 return (
-                    <div key={character.id} className={`w-[330px] h-[219px] rounded-[5px] shadow-[5px] ${bgCard} relative`}>
+                    <div key={character.id} className={`w-[330px] h-[219px] rounded-[5px] !shadow-2xl ${bgCard} relative`}>
                         {character.personal.affiliation?.includes('Akatsuki') ?
                             <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />
                             :
