@@ -2,6 +2,7 @@ import { MagnifyingGlass } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import { Squash } from "hamburger-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface NavbarProps {
     items: string[];
@@ -34,7 +35,7 @@ export function Navbar(props: NavbarProps) {
                 {isOpen && (
                     <ul className="font-MPLUS1CODE font-bold text-white text-[40px] ml-[20px] pt-[24px]">
                         {props.items.map((item, index) => (
-                            <li key={index}><a href="">{item}</a></li>
+                            <li key={index}><Link to={`/${item}`}>{item}</Link></li>
                         ))}
                     </ul>
                 )}
