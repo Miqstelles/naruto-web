@@ -7,7 +7,7 @@ export function Header() {
             <Navbar
                 items={['Characters', 'Clans', 'Akatsuki', 'Tailed Beasts']}
             />
-            <img src={banner} alt="" className="w-full h-[155px]" />
+            <img src={banner} alt="Naruto Characters" className="w-full h-[155px]" />
         </header>
     )
 }
