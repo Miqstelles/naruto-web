@@ -9,7 +9,6 @@ interface NavbarProps {
 }
 
 export function Navbar(props: NavbarProps) {
-
     const [isOpen, setOpen] = useState(false);
 
     return (
@@ -26,11 +25,12 @@ export function Navbar(props: NavbarProps) {
 
                 <MagnifyingGlass color="#fff" size={40} className={`${isOpen ? 'hidden' : null}`} />
             </div>
+
             <motion.div
                 initial={{ opacity: 1, y: isOpen ? 0 : -40 }}
                 animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -40 }}
                 transition={{ duration: 0.4 }}
-                className={`w-full h-[285px] bg-[#1E1D1D] absolute ${isOpen ? null : 'mt-[40px]'}`}
+                className={`w-full h-[285px] bg-[#1E1D1D]  ${isOpen ? 'absolute' : 'hidden'}`}
             >
                 {isOpen && (
                     <ul className="font-MPLUS1CODE font-bold text-white text-[2.5rem] ml-[20px] pt-[24px]">
@@ -39,9 +39,7 @@ export function Navbar(props: NavbarProps) {
                         ))}
                     </ul>
                 )}
-
             </motion.div>
         </nav>
-
     )
 }
