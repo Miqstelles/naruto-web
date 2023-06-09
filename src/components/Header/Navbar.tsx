@@ -33,7 +33,7 @@ export function Navbar(props: NavbarProps) {
                 className={`w-full h-[285px] bg-[#1E1D1D] absolute ${isOpen ? null : 'mt-[40px]'}`}
             >
                 {isOpen && (
-                    <ul className="font-MPLUS1CODE font-bold text-white text-[40px] ml-[20px] pt-[24px]">
+                    <ul className="font-MPLUS1CODE font-bold text-white text-[2.5rem] ml-[20px] pt-[24px]">
                         {props.items.map((item, index) => (
                             <li key={index}><Link to={`/${item}`}>{item}</Link></li>
                         ))}
