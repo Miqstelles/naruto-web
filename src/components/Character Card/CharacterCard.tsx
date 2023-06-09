@@ -16,13 +16,17 @@ export function CharacterCard() {
 
     useEffect(() => {
         setLoading(true)
+
+        fetchCharacter(`?page=${randomPage}&limit=5`)
+            .then(response => setCharacters(response.data.characters))
+            .catch(error => console.log(error));
+
         const timer = setTimeout(() => {
-            fetchCharacter(`?page=${randomPage}&limit=5`)
-                .then(response => setCharacters(response.data.characters))
-                .catch(error => console.log(error));
             setLoading(false)
-        }, 1000);
+        }, 1500);
+
         setCharacters([])
+
         return () => clearTimeout(timer);
     }, []);
 
