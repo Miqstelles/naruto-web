@@ -65,6 +65,22 @@ export type Character = {
     };
 };
 
+export type Clan = {
+    name: string;
+}
+
+export type Village = {
+    name: string;
+}
+
 export const fetchCharacter = axios.create({
     baseURL: "https://api.narutodb.xyz/character/"
+})
+
+export const fetchClan = axios.create({
+    baseURL: "https://api.narutodb.xyz/clan/"
+})
+
+export const fetchVillage = axios.create({
+    baseURL: "https://api.narutodb.xyz/village/"
 })
