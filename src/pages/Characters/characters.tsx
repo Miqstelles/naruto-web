@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 
+import { CharacterCard } from "../../components/Character Card/CharacterCard";
+import { Footer } from "../../components/Footer";
 import { Navbar } from "../../components/Header/Navbar";
-import { Character, Clan, Village, fetchCharacter, fetchClan, fetchVillage } from "../../services/api";
+import { Clan, Village, fetchClan, fetchVillage } from "../../services/api";
+
+import kunaileft from '../../assets/kunaileft.png'
+import kunairight from '../../assets/kunairight.png'
+
 import { motion } from "framer-motion";
 import { CaretDown, CaretRight, X } from "@phosphor-icons/react";
 
 export function Characters() {
-    const [characters, setCharacters] = useState<Character[]>([])
-    console.log(characters)
-
-    useEffect(() => {
-        fetchCharacter(`?page=1&limit=10`)
-            .then(response => setCharacters(response.data.characters))
-            .catch(error => console.log(error))
-    }, []);
 
     const [clans, setClans] = useState<Clan[]>([])
     const ranks = ['Genin', 'Chūnin', 'Jōnin', 'Kage']
@@ -75,6 +73,8 @@ export function Characters() {
         setFilteredItems(combinedItems);
     }, [filteredClans, filteredRanks, filteredVillages]);
 
+    const [page, setPage] = useState(1)
+
     return (
         <div className="bg-[#343434] w-full h-full">
             <header>
@@ -82,11 +82,11 @@ export function Characters() {
                     items={['Characters', 'Clans', 'Akatsuki', 'Tailed Beasts']}
                 />
             </header>
-            <main className="flex flex-col justify-center items-center mt-[32px] ">
+            <main className="flex flex-col justify-center items-center mt-[32px] gap-[44px]">
                 <article>
                     <p className="font-MPLUS1CODE font-bold text-white text-[2.5rem] text-center">Characters</p>
                     <div
-                        className="w-[330px] h-[83px] bg-[#C9683C] rounded-t-[5px] flex justify-between items-center px-[28px]"
+                        className="w-[330px] h-[83px] bg-[#C9683C] rounded-t-[5px] flex justify-between items-center px-[28px] mt-[44px]"
                         onClick={isOpen ? () => setOpen(false) : () => setOpen(true)}
                     >
                         <p className="font-MPLUS1CODE font-bold text-[2.5rem] text-white">Filters</p>
@@ -172,7 +172,21 @@ export function Characters() {
                         }
                     </motion.div>
                 </article>
+
+                <CharacterCard
+                    page={page}
+                    limit={5}
+                    pageControler={true}
+                />
+                <div className="flex items-center gap-[20px] font-MPLUS1CODE font-bold text-[2rem] text-white">
+                    <div className={page === 1 ? 'invisible' : ''}><button onClick={() => page === 1 ? setPage(1) : page === 286 ? setPage(284) : setPage(page - 1)}><img src={kunaileft} alt="" height="20px" /></button></div>
+
+                    <p>{page}</p>
+
+                    <div className={page === 286 ? 'invisible' : ''}><button onClick={() => page === 284 ? setPage(286) : setPage(page + 1)}><img src={kunairight} alt="" height="20px" /></button></div>
+                </div>
             </main>
+            <Footer />
         </div >
     )
 }
