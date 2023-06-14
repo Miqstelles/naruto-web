@@ -6,7 +6,7 @@ import { Filters } from "../../components/Filters";
 
 export function Characters() {
     const [characters, setCharacters] = useState<Character[]>([])
-
+    console.log(characters)
     useEffect(() => {
         fetchCharacter(`?page=1&limit=10`)
             .then(response => setCharacters(response.data.characters))

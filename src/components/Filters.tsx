@@ -37,6 +37,7 @@ export function Filters() {
     const [filteredVillages, setFilteredVillages] = useState<string[]>([])
 
     const [filteredItems, setFilteredItems] = useState<string[]>([])
+    console.log(filteredItems)
 
     const handleCheckboxClick = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedItems = event.target.value
