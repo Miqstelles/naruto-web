@@ -13,7 +13,7 @@ export function Navbar(props: NavbarProps) {
 
     return (
         <nav>
-            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row ' : 'flex border-b-[2px]'} justify-center items-center gap-[72px] `}>
+            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row ' : 'flex border-b-[2px]'} justify-center items-center gap-[72px]`}>
                 <button
                     className={`w-[50px] h-[50px] ${isOpen ? 'mt-[14px] ml-[20px]' : null}`}
                     onClick={isOpen ? () => setOpen(false) : () => setOpen(true)}
@@ -21,7 +21,9 @@ export function Navbar(props: NavbarProps) {
                     <Squash color="#fff" size={40} />
                 </button>
 
-                <p className={`text-white font-Lexend text-[2.5rem]  ${isOpen ? 'hidden' : null}`}>N<span className="text-[#C9683C]">WEB</span></p>
+                <p className={`text-white font-Lexend text-[2.5rem]  ${isOpen ? 'hidden' : null}`}>
+                    <Link to={'/'}>N<span className="text-[#C9683C]">WEB</span></Link>
+                </p>
 
                 <MagnifyingGlass color="#fff" size={40} className={`${isOpen ? 'hidden' : null}`} />
             </div>
