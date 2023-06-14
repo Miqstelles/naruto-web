@@ -9,15 +9,20 @@ import Mizukage from '../../assets/mizukage.svg'
 import { CharacterInfoImg } from '../CharacterInfoImg';
 import { Skeleton } from '../Skeleton';
 
-export function CharacterCard() {
+interface pageProp {
+    page: number;
+    pageControler: boolean;
+    limit: number;
+}
+
+export function CharacterCard(props: pageProp) {
     const [characters, setCharacters] = useState<Character[]>([])
     const [loading, setLoading] = useState(false)
-    const randomPage = Math.floor(Math.random() * 250)
 
     useEffect(() => {
         setLoading(true)
 
-        fetchCharacter(`?page=${randomPage}&limit=5`)
+        fetchCharacter(`?page=${props.page}&limit=${props.limit}`)
             .then(response => setCharacters(response.data.characters))
             .catch(error => console.log(error));
 
@@ -28,7 +33,9 @@ export function CharacterCard() {
         setCharacters([])
 
         return () => clearTimeout(timer);
-    }, []);
+    }, [props.page]);
+
+
 
     return (
         <div className="grid gap-[20px]">
@@ -49,8 +56,8 @@ export function CharacterCard() {
                 const bgCard = appearsLength && appearsLength >= 32 ? isAkatsuki : 'bg-white'
 
                 return (
-                    <div key={character.id} title={character.name} className={`w-[330px] h-[219px] rounded-[5px] !shadow-2xl ${bgCard} duration-75 relative hover:scale-105`}>
-                        {character.personal.affiliation?.includes('Akatsuki') ?
+                    <div key={character.id} title={character.name} className={`w-[330px] h-[219px] rounded-[5px] !shadow-2xl ${bgCard} duration-75 hover:scale-105`}>
+                        {character.personal?.affiliation?.includes('Akatsuki') ?
                             <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />
                             :
                             character.personal.occupation?.includes('Hokage') ? <CharacterInfoImg src={Hokage} alt="Hokage Logo" title="Hokage" />
