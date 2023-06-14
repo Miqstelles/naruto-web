@@ -1,41 +1,16 @@
-import { CaretDown, CaretRight, X } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
 import { Navbar } from "../../components/Header/Navbar";
-import { fetchClan, Clan } from "../../services/api";
+import { Character, fetchCharacter } from "../../services/api";
 import { Filters } from "../../components/Filters";
 
 export function Characters() {
-    const [clans, setClans] = useState<Clan[]>([])
-
-    const [isOpen, setOpen] = useState(false)
-    const [loading, setLoading] = useState(false)
-
-    const filtersItems = ['Clans', 'Rank', 'Village']
-    const [listOpen, setListOpen] = useState(0)
-
-    const toggleListOpen = (index: any) => {
-        setListOpen((prevIndex) => {
-            if (prevIndex === index) return prevIndex
-            else return index
-        })
-    }
+    const [characters, setCharacters] = useState<Character[]>([])
 
     useEffect(() => {
-        setLoading(true)
-
-        fetchClan(`?page=1&limit=58`)
-            .then(response => setClans(response.data.clans))
+        fetchCharacter(`?page=1&limit=10`)
+            .then(response => setCharacters(response.data.characters))
             .catch(error => console.log(error))
-
-        const timer = setTimeout(() => {
-            setLoading(false)
-        }, 0);
-
-        setClans([])
-
-        return () => clearTimeout(timer);
     }, []);
 
     return (
