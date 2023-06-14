@@ -20,7 +20,11 @@ export function Home() {
 
                 <section className="grid justify-center w-full h-[1342px] bg-[#C9683C] mt-[52px] ">
                     <div className="mt-[32px] grid">
-                        <CharacterCard />
+                        <CharacterCard
+                            page={Math.floor(Math.random() * 250)}
+                            limit={5}
+                            pageControler={false}
+                        />
                     </div>
                 </section>
             </main>
