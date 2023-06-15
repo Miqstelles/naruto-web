@@ -35,8 +35,6 @@ export function CharacterCard(props: pageProp) {
         return () => clearTimeout(timer);
     }, [props.page]);
 
-
-
     return (
         <div className="grid gap-[20px]">
             {loading &&
