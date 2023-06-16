@@ -23,6 +23,7 @@ export function Home() {
                         <CharacterCard
                             page={Math.floor(Math.random() * 250)}
                             limit={5}
+                            filter={false}
                         />
                     </div>
                 </section>

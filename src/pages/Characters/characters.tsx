@@ -18,7 +18,6 @@ export function Characters() {
         setPage(1)
     }, [pageNumber])
 
-
     return (
         <div className="bg-[#343434] w-full h-full">
             <header>
@@ -37,6 +36,7 @@ export function Characters() {
                 <CharacterCard
                     page={page}
                     limit={5}
+                    filter={true}
                 />
 
                 <div className="flex items-center gap-[20px] font-MPLUS1CODE font-bold text-[2rem] text-white">
