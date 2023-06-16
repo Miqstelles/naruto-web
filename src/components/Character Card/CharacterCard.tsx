@@ -1,39 +1,81 @@
 import { useEffect, useState } from 'react'
-import { fetchCharacter, Character } from '../../services/api';
+import { useDispatch, useSelector } from 'react-redux'
+
+import { fetchCharacter, Character } from '../../services/api'
+import { CharacterInfoImg } from '../CharacterInfoImg'
+import { Skeleton } from '../Skeleton'
+
 import Akatsuki from '../../assets/akatsuki.png'
 import Tsuchikage from '../../assets/tsuchikage.svg'
 import Hokage from '../../assets/hokage.svg'
 import Raikage from '../../assets/raikage.svg'
 import Kazekage from '../../assets/kazekage.svg'
 import Mizukage from '../../assets/mizukage.svg'
-import { CharacterInfoImg } from '../CharacterInfoImg';
-import { Skeleton } from '../Skeleton';
+import { setPageNumber } from '../../redux/action'
 
 interface pageProp {
-    page: number;
-    pageControler: boolean;
-    limit: number;
+    page: number
+    limit: number
 }
 
 export function CharacterCard(props: pageProp) {
     const [characters, setCharacters] = useState<Character[]>([])
     const [loading, setLoading] = useState(false)
 
+    const filteredItems = useSelector((state: any) => state.filters.filteredItems)
+
     useEffect(() => {
         setLoading(true)
 
-        fetchCharacter(`?page=${props.page}&limit=${props.limit}`)
+        fetchCharacter(`?page=1&limit=1348`)
             .then(response => setCharacters(response.data.characters))
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
 
         const timer = setTimeout(() => {
             setLoading(false)
-        }, 1500);
+        }, 1500)
 
         setCharacters([])
 
-        return () => clearTimeout(timer);
-    }, [props.page]);
+        return () => clearTimeout(timer)
+    }, [filteredItems])
+
+
+    const [itemsData, setItemsData] = useState<Character[]>([])
+
+    const currentPage = props.page
+    const itemsPerPage = props.limit
+
+    const lastIndex = currentPage * itemsPerPage
+    const firstIndex = lastIndex - itemsPerPage
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        let filtered = characters
+
+        if (filteredItems.length > 0) {
+            filtered = characters.filter(character => {
+                const matchesClan = filteredItems.includes(character.personal.clan)
+                const matchesAfilliation = filteredItems.includes(character.personal.affiliation)
+                const matchesRankPartOne = filteredItems.includes(character.rank?.ninjaRank?.['Part I'])
+                const matchesRankPartTwo = filteredItems.includes(character.rank?.ninjaRank?.['Part II'])
+                const matchesRankGaiden = filteredItems.includes(character.rank?.ninjaRank?.['Gaiden'])
+                const matchesKages = filteredItems.includes(character.personal.occupation)
+
+                return matchesClan || matchesAfilliation || matchesRankPartOne || matchesRankPartTwo || matchesRankGaiden || matchesKages
+            })
+        }
+
+        setItemsData(filtered)
+    }, [filteredItems, characters])
+
+
+    useEffect(() => {
+        dispatch(setPageNumber(Math.ceil(itemsData.length / itemsPerPage)))
+    }, [itemsData, filteredItems])
+
+    const currentItems = itemsData.slice(firstIndex, lastIndex);
 
     return (
         <div className="grid gap-[20px]">
@@ -43,7 +85,7 @@ export function CharacterCard(props: pageProp) {
                 )
             }
 
-            {!loading && characters.map(character => {
+            {!loading && currentItems.map(character => {
                 const characterImg = character.images[character.images.length === 1 ? 0 : 1]?.replace(/\/revision\/.*$/, '')
 
                 const appearsLength = character && character.debut && character?.debut?.appearsIn?.length
