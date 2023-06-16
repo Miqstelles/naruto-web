@@ -1,5 +1,9 @@
-export function characterDetails() {
+import { useParams } from "react-router-dom";
+
+export function CharacterDetails() {
+    const { id } = useParams<{ id: string }>()
+
     return (
-        <div></div>
+        <div>{id}</div>
     )
 }
