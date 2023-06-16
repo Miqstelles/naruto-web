@@ -54,6 +54,7 @@ export type Character = {
     rank: {
         ninjaRank: {
             "Part I": string;
+            "Part II": string;
             Gaiden: string;
         };
         ninjaRegistration: string;
