@@ -16,6 +16,7 @@ import { setPageNumber } from '../../redux/action'
 interface pageProp {
     page: number
     limit: number
+    filter: boolean
 }
 
 export function CharacterCard(props: pageProp) {
@@ -27,13 +28,13 @@ export function CharacterCard(props: pageProp) {
     useEffect(() => {
         setLoading(true)
 
-        fetchCharacter(`?page=1&limit=1348`)
+        fetchCharacter(`?page=1&limit=1424`)
             .then(response => setCharacters(response.data.characters))
             .catch(error => console.log(error))
 
         const timer = setTimeout(() => {
             setLoading(false)
-        }, 1500)
+        }, 700)
 
         setCharacters([])
 
@@ -50,11 +51,12 @@ export function CharacterCard(props: pageProp) {
     const firstIndex = lastIndex - itemsPerPage
 
     const dispatch = useDispatch()
+    const filter = props.filter
 
     useEffect(() => {
         let filtered = characters
 
-        if (filteredItems.length > 0) {
+        if (filter === true && filteredItems.length > 0) {
             filtered = characters.filter(character => {
                 const matchesClan = filteredItems.includes(character.personal.clan)
                 const matchesAfilliation = filteredItems.includes(character.personal.affiliation)
@@ -74,7 +76,9 @@ export function CharacterCard(props: pageProp) {
         dispatch(setPageNumber(Math.ceil(itemsData.length / itemsPerPage)))
     }, [itemsData, filteredItems])
 
-    const currentItems = itemsData.slice(firstIndex, lastIndex);
+    const currentItems = itemsData.slice(firstIndex, lastIndex)
+
+
 
     return (
         <div className="grid gap-[20px]">
