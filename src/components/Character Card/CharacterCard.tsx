@@ -70,7 +70,6 @@ export function CharacterCard(props: pageProp) {
         setItemsData(filtered)
     }, [filteredItems, characters])
 
-
     useEffect(() => {
         dispatch(setPageNumber(Math.ceil(itemsData.length / itemsPerPage)))
     }, [itemsData, filteredItems])
@@ -125,7 +124,7 @@ export function CharacterCard(props: pageProp) {
                                                 {character?.personal?.clan?.length >= 16 ? character.personal.clan.substring(0, 7) + "..." : character.personal.clan}
                                             </p>
                                             :
-                                            <p>Clan: Undefinded</p>
+                                            <p>Clan: unknown</p>
                                         }
                                     </div>
 
@@ -133,7 +132,7 @@ export function CharacterCard(props: pageProp) {
                                         {character.personal.age ?
                                             <p className="font-MPLUS1CODE"><span className="font-bold">Age: </span>{character.personal.age['Part II'] ? character.personal.age['Part II'] : character.personal.age['Part I']}</p>
                                             :
-                                            <p>Age: Undefinded</p>
+                                            <p>Age: unknown</p>
                                         }
 
                                         {character.personal.status ?
