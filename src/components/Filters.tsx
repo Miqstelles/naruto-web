@@ -1,19 +1,37 @@
 import { useEffect, useState } from "react";
-import { Clan, Village } from '../../src/services/api'
+import { Clan, Village, fetchClan, fetchVillage } from '../../src/services/api'
+
+import { useDispatch } from 'react-redux';
+import { setFilteredItem } from "../redux/action";
+
 import { motion } from "framer-motion";
 import { CaretDown, CaretRight, X } from "@phosphor-icons/react";
 
 
-export interface FilterProps {
-    clans: Clan[];
-    ranks: string[];
-    villages: Village[];
-}
+export function Filters() {
+    const [clans, setClans] = useState<Clan[]>([])
+    const ranks = ['Genin', 'Chūnin', 'Jōnin', 'Kage']
+    const kages = ['Hokage', 'Tsuchikage', 'Raikage', 'Kazekage', 'Mizukage']
+    const [villages, setVillages] = useState<Village[]>([])
 
-export function Filters(props: FilterProps) {
+    useEffect(() => {
+        fetchClan(`?page=1&limit=58`)
+            .then(response => setClans(response.data.clans))
+            .catch(error => console.log(error))
+    }, [])
+
+    useEffect(() => {
+        fetchVillage(`?page=1&limit=39`)
+            .then(response => setVillages(response.data.villages))
+            .catch(error => console.log(error))
+    }, [])
+
+
+    const dispatch = useDispatch()
+
     const [isOpen, setOpen] = useState(false)
 
-    const filtersItems = ['Clans', 'Rank', 'Village']
+    const filtersItems = ['Clans', 'Rank', 'Village', 'Kages']
     const [listOpen, setListOpen] = useState(0)
 
     const toggleListOpen = (index: any) => {
@@ -25,10 +43,8 @@ export function Filters(props: FilterProps) {
 
     const [filteredClans, setFilteredClans] = useState<string[]>([])
     const [filteredRanks, setFilteredRanks] = useState<string[]>([])
+    const [filteredKages, setFilteredKages] = useState<string[]>([])
     const [filteredVillages, setFilteredVillages] = useState<string[]>([])
-
-    const [filteredItems, setFilteredItems] = useState<string[]>([])
-
 
     const handleCheckboxClick = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedItems = event.target.value
@@ -48,12 +64,17 @@ export function Filters(props: FilterProps) {
             prevVillages.filter(item => item !== selectedItems)
             :
             [...prevVillages, selectedItems])
+
+        else if (listIndex === 3) setFilteredKages(prevKages => prevKages.includes(selectedItems) ?
+            prevKages.filter(item => item !== selectedItems)
+            :
+            [...prevKages, selectedItems])
     }
 
     useEffect(() => {
-        const combinedItems = [...filteredClans, ...filteredRanks, ...filteredVillages];
-        setFilteredItems(combinedItems);
-    }, [filteredClans, filteredRanks, filteredVillages]);
+        const combinedItems = [...filteredClans, ...filteredRanks, ...filteredKages, ...filteredVillages];
+        dispatch(setFilteredItem(combinedItems));
+    }, [filteredClans, filteredRanks, filteredKages, filteredVillages, dispatch]);
 
     return (
         <div>
@@ -74,7 +95,7 @@ export function Filters(props: FilterProps) {
                 initial={{ opacity: 1, y: isOpen ? 0 : -40 }}
                 animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -40 }}
                 transition={{ duration: 0.4 }}
-                className={`w-[330px] h-[272px] bg-[#C9683C] rounded-b-[5px]  ${isOpen ? 'absolute' : 'hidden'}`}
+                className={`w-[330px] h-[272px] bg-[#C9683C] rounded-b-[5px]  ${isOpen ? 'relative' : 'hidden'}`}
             >
                 {isOpen && (
                     <div className="flex justify-between mx-[20px] pt-[24px]">
@@ -88,10 +109,21 @@ export function Filters(props: FilterProps) {
                                     </li>
                                 )
                             })}
+                            <button
+                                className="mt-[15px] w-full h-[50px] bg-[#AD3C23] text-[32px] font-bold"
+                                onClick={() => {
+                                    setFilteredClans([])
+                                    setFilteredRanks([])
+                                    setFilteredVillages([])
+                                    setFilteredKages([])
+                                }}
+                            >
+                                Reset
+                            </button>
                         </ul>
 
                         <div className="w-[168px] h-[230px] bg-[#E99671] rounded-[5px] overflow-y-scroll pt-[16px] pb-[16px]">
-                            {listOpen === 0 && props.clans.map((clan, index) => {
+                            {listOpen === 0 && clans.map((clan, index) => {
                                 return (
                                     <div className="flex items-center pl-[14px] gap-[14px]" key={index}>
                                         <input className="checkbox" type="checkbox" value={clan.name}
@@ -107,7 +139,7 @@ export function Filters(props: FilterProps) {
                             })
                             }
 
-                            {listOpen === 1 && props.ranks.map((rank, index) => {
+                            {listOpen === 1 && ranks.map((rank, index) => {
                                 return (
                                     <div className="flex items-center pl-[14px] gap-[14px]" key={index}>
                                         <input className="checkbox" type="checkbox" value={rank}
@@ -123,7 +155,7 @@ export function Filters(props: FilterProps) {
                             })
                             }
 
-                            {listOpen === 2 && props.villages.map((village, index) => {
+                            {listOpen === 2 && villages.map((village, index) => {
                                 return (
                                     <div className="flex items-center pl-[14px] gap-[14px]" key={index}>
                                         <input className="checkbox" type="checkbox" value={village.name}
@@ -133,6 +165,22 @@ export function Filters(props: FilterProps) {
 
                                         <label className="font-MPLUS1CODE text-[16px] text-white">
                                             {village.name.length >= 15 ? village.name.substring(0, 7) + "..." : village.name}
+                                        </label>
+                                    </div>
+                                )
+                            })
+                            }
+
+                            {listOpen === 3 && kages.map((kage, index) => {
+                                return (
+                                    <div className="flex items-center pl-[14px] gap-[14px]" key={index}>
+                                        <input className="checkbox" type="checkbox" value={kage}
+                                            onChange={handleCheckboxClick}
+                                            checked={filteredKages.includes(kage)}
+                                        />
+
+                                        <label className="font-MPLUS1CODE text-[16px] text-white">
+                                            {kage.length >= 15 ? kage.substring(0, 7) + "..." : kage}
                                         </label>
                                     </div>
                                 )
