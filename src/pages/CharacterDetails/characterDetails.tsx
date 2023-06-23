@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { Character, fetchCharacter } from "../../services/api";
 import { Navbar } from "../../components/Header/Navbar";
 import { Footer } from "../../components/Footer";
+import { CaretRight } from "@phosphor-icons/react";
 
 export function CharacterDetails() {
     const { id } = useParams<{ id: string }>()
     const [character, setCharacter] = useState<Character[]>([])
     const [part, setPart] = useState(true)
+
+    const page = ['Personal', 'Jutsus']
+    const [currentPage, setCurrentPage] = useState(0)
 
     useEffect(() => {
         fetchCharacter(`?page=${Number(id) + 1}&limit=1`)
@@ -15,14 +20,14 @@ export function CharacterDetails() {
             .catch(error => console.log(error))
     })
 
-
     return (
         <div className="bg-[#343434] w-full h-full">
-            <Navbar
+            <header>            <Navbar
                 items={['Characters', 'Clans', 'Akatsuki', 'Tailed Beasts']}
             />
+            </header>
 
-            <main className="flex justify-center items-center">
+            <main className="flex justify-center items-center relative">
                 {character && character.map(character => {
                     const characterImg = character.images[character.images.length === 1 ? 0 : part ? 1 : 0]?.replace(/\/revision\/.*$/, '')
 
@@ -59,7 +64,7 @@ export function CharacterDetails() {
 
                                             <p className="text-center mt-[16px]">
                                                 <span className="font-bold">Clan: </span>
-                                                {character.personal.clan ? character.personal.clan : 'unknown'}
+                                                {character.personal.clan ? character?.personal?.clan?.length >= 16 ? character.personal.clan.substring(0, 7) + "..." : character.personal.clan : 'unknown'}
                                             </p>
 
                                             <p className="text-center mt-[16px]">
@@ -78,33 +83,63 @@ export function CharacterDetails() {
                                         </div>
                                     </div>
 
-                                    <div className="h-[66px] bg-[#E29A79] font-bold text-[2.5rem] text-center drop-shadow-lg mt-[28px]">Personal</div>
+                                    <div
+                                        className={`h-[66px] flex items-center ${character.jutsu ? 'justify-between px-[44px]' : 'justify-center'} bg-[#E29A79] font-bold text-[2.5rem] text-center drop-shadow-lg mt-[28px] select-none`}
+                                    >
+                                        {page[currentPage]}
+                                        <button
+                                            onClick={() => currentPage === 1 ? setCurrentPage(0) : setCurrentPage(1)}
+                                            className={character.jutsu ? '' : 'hidden'}
+                                        >
+                                            <CaretRight size={48} />
+                                        </button>
 
-                                    <div className="ml-[25px] mt-[30px] text-[1.5rem] grid gap-[18px]">
-                                        <p>
-                                            <span className="font-bold">Sex: </span>
-                                            {character.personal.sex ? character.personal.sex : 'unknown'}
-                                        </p>
+                                    </div>
 
-                                        <p>
-                                            <span className="font-bold">Height </span>
-                                            {character.personal.height ? character.personal.height[part ? 'Part II' : 'Part I'] : 'unknown'}
-                                        </p>
+                                    <div
+                                        className=
+                                        {`ml-[${currentPage === 0 ? '25px' : '15px'}] mt-[30px] text-[1.5rem] grid gap-[18px h-[300px] 
+                                        ${currentPage === 1 && 'overflow-y-scroll scrollbar-thin scrollbar-thumb-[#E29A79] scrollbar-track-white'}`}
+                                    >
+                                        {currentPage === 0 &&
+                                            <>
+                                                <p>
+                                                    <span className="font-bold">Sex: </span>
+                                                    {character.personal.sex ? character.personal.sex : 'unknown'}
+                                                </p>
 
-                                        <p>
-                                            <span className="font-bold">Weight: </span>
-                                            {character.personal.weight ? character.personal.weight[part ? 'Part II' : 'Part I'] : 'unknown'}
-                                        </p>
+                                                <p>
+                                                    <span className="font-bold">Height </span>
+                                                    {character.personal.height ? character.personal.height[part ? 'Part II' : 'Part I'] : 'unknown'}
+                                                </p>
 
-                                        <p>
-                                            <span className="font-bold">Rank: </span>
-                                            {character.rank.ninjaRank[part ? 'Part II' : 'Part I'] ? character.rank.ninjaRank[part ? 'Part II' : 'Part I'] : 'unknown'}
-                                        </p>
+                                                <p>
+                                                    <span className="font-bold">Weight: </span>
+                                                    {character.personal.weight ? character.personal.weight[part ? 'Part II' : 'Part I'] : 'unknown'}
+                                                </p>
 
-                                        <p>
-                                            <span className="font-bold">Birthdate: </span>
-                                            {character.personal.birthdate ? character.personal.birthdate : 'unknown'}
-                                        </p>
+                                                <p>
+                                                    <span className="font-bold">Rank: </span>
+                                                    {character.rank?.ninjaRank[part ? 'Part II' : 'Part I'] ? character.rank.ninjaRank[part ? 'Part II' : 'Part I'] : 'unknown'}
+                                                </p>
+
+                                                <p>
+                                                    <span className="font-bold">Birthdate: </span>
+                                                    {character.personal.birthdate ? character.personal.birthdate : 'unknown'}
+                                                </p>
+                                            </>
+
+
+                                        }
+
+                                        {
+                                            currentPage === 1 && character.jutsu &&
+                                            <div>{character.jutsu.map((jutsus, index) => {
+                                                return (
+                                                    <p key={index}>{`${index + 1} ` + jutsus}</p>
+                                                )
+                                            })}</div>
+                                        }
                                     </div>
                                 </div>
                             </div>
