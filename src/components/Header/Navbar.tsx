@@ -32,7 +32,7 @@ export function Navbar(props: NavbarProps) {
                 initial={{ opacity: 1, y: isOpen ? 0 : -40 }}
                 animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -40 }}
                 transition={{ duration: 0.4 }}
-                className={`w-full h-[285px] bg-[#1E1D1D]  ${isOpen ? 'absolute' : 'hidden'}`}
+                className={`w-full h-[285px] bg-[#1E1D1D] ${isOpen ? 'absolute' : 'hidden'}`}
             >
                 {isOpen && (
                     <ul className="font-MPLUS1CODE font-bold text-white text-[2.5rem] ml-[20px] pt-[24px]">

@@ -79,8 +79,6 @@ export function CharacterCard(props: pageProp) {
 
     const currentItems = itemsData.slice(firstIndex, lastIndex)
 
-
-
     return (
         <div className="grid gap-[20px]">
             {loading &&
