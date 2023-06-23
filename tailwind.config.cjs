@@ -9,7 +9,8 @@ module.exports = {
       MPLUS1CODE: ["'M PLUS 1 Code'", 'sans-serif'],
       Lexend: ["'Lexend'", 'sans-serif'],
     },
-    extend: {},
+    extend: {
+    },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 }
