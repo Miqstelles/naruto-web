@@ -5,6 +5,7 @@ import { Character, fetchCharacter } from "../../services/api";
 import { Navbar } from "../../components/Header/Navbar";
 import { Footer } from "../../components/Footer";
 import { CaretRight } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
 
 export function CharacterDetails() {
     const { id } = useParams<{ id: string }>()
@@ -83,17 +84,22 @@ export function CharacterDetails() {
                                         </div>
                                     </div>
 
-                                    <div
-                                        className={`h-[66px] flex items-center ${character.jutsu ? 'justify-between px-[44px]' : 'justify-center'} bg-[#E29A79] font-bold text-[2.5rem] text-center drop-shadow-lg mt-[28px] select-none`}
-                                    >
-                                        {page[currentPage]}
-                                        <button
-                                            onClick={() => currentPage === 1 ? setCurrentPage(0) : setCurrentPage(1)}
-                                            className={character.jutsu ? '' : 'hidden'}
+                                    <div className={`bg-[#E29A79] font-bold text-[2.5rem] text-center drop-shadow-lg  select-none`}>
+                                        <motion.div
+                                            initial={{ opacity: 0, x: -100 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ duration: 0.4 }}
+                                            className={`h-[66px] flex items-center ${character.jutsu ? 'justify-between px-[44px]' : 'justify-center'} mt-[28px]`}
                                         >
-                                            <CaretRight size={48} />
-                                        </button>
-
+                                            <p>
+                                                {page[currentPage]}</p>
+                                            <button
+                                                onClick={() => currentPage === 1 ? setCurrentPage(0) : setCurrentPage(1)}
+                                                className={character.jutsu ? '' : 'hidden'}
+                                            >
+                                                <CaretRight size={48} />
+                                            </button>
+                                        </motion.div>
                                     </div>
 
                                     <div
