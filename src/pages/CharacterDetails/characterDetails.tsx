@@ -104,8 +104,7 @@ export function CharacterDetails() {
 
                                 <div
                                     className=
-                                    {`ml-[${currentPage === 0 ? '25px' : '15px'}] mt-[30px] text-[1.5rem] grid gap-[18px h-[300px] 
-                                        ${currentPage === 1 && 'overflow-y-scroll scrollbar-thin scrollbar-thumb-[#E29A79] scrollbar-track-white'}`}
+                                    {`ml-[25px] mt-[30px] text-[1.5rem] grid gap-[18px] h-[300px] ${currentPage === 1 && 'overflow-y-scroll scrollbar-thin scrollbar-thumb-[#E29A79] scrollbar-track-white'}`}
                                 >
                                     {currentPage === 0 &&
                                         <>
@@ -134,12 +133,9 @@ export function CharacterDetails() {
                                                 {character.personal.birthdate ? character.personal.birthdate : 'unknown'}
                                             </p>
                                         </>
-
-
                                     }
 
-                                    {
-                                        currentPage === 1 && character.jutsu &&
+                                    {currentPage === 1 && character.jutsu &&
                                         <div>{character.jutsu.map((jutsus, index) => {
                                             return (
                                                 <p key={index}>{`${index + 1} ` + jutsus}</p>
