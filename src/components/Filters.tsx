@@ -95,7 +95,7 @@ export function Filters() {
                 initial={{ opacity: 1, y: isOpen ? 0 : -40 }}
                 animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -40 }}
                 transition={{ duration: 0.4 }}
-                className={`w-[330px] h-[272px] bg-[#C9683C] rounded-b-[5px]  ${isOpen ? 'relative' : 'hidden'}`}
+                className={`w-[330px] h-[272px] bg-[#C9683C] rounded-b-[5px]  ${!isOpen && 'hidden'}`}
             >
                 {isOpen && (
                     <div className="flex justify-between mx-[20px] pt-[24px]">

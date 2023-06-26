@@ -35,8 +35,8 @@ export function CharacterCard(props: pageProp) {
 
 
         const timer = setTimeout(() => {
-            itemsData ? setLoading(false) : setLoading(true)
-        }, 700)
+            setLoading(false)
+        }, 2000)
 
         setCharacters([])
 
@@ -126,7 +126,7 @@ export function CharacterCard(props: pageProp) {
                                             {character.personal.clan ?
                                                 <p className="font-MPLUS1CODE" title={character.personal.clan}>
                                                     <span className="font-bold">Clan: </span>
-                                                    {character?.personal?.clan?.length >= 16 ? character.personal.clan.substring(0, 7) + "..." : character.personal.clan}
+                                                    {character?.personal?.clan[0]?.length >= 16 ? character.personal.clan.substring(0, 7) + "..." : character.personal.clan}
                                                 </p>
                                                 :
                                                 <p>Clan: unknown</p>

@@ -9,23 +9,23 @@ interface NavbarProps {
 }
 
 export function Navbar(props: NavbarProps) {
-    const [isOpen, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(false)
 
     return (
         <nav>
             <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row ' : 'flex border-b-[2px]'} justify-center items-center gap-[72px]`}>
                 <button
-                    className={`w-[50px] h-[50px] ${isOpen ? 'mt-[14px] ml-[20px]' : null}`}
+                    className={`w-[50px] h-[50px] ${isOpen && 'mt-[14px] ml-[20px]'}`}
                     onClick={isOpen ? () => setOpen(false) : () => setOpen(true)}
                 >
                     <Squash color="#fff" size={40} />
                 </button>
 
-                <p className={`text-white font-Lexend text-[2.5rem]  ${isOpen ? 'hidden' : null}`}>
+                <p className={`text-white font-Lexend text-[2.5rem]  ${isOpen && 'hidden'}`}>
                     <Link to={'/'}>N<span className="text-[#C9683C]">WEB</span></Link>
                 </p>
 
-                <MagnifyingGlass color="#fff" size={40} className={`${isOpen ? 'hidden' : null}`} />
+                <MagnifyingGlass color="#fff" size={40} className={`${isOpen && 'hidden'}`} />
             </div>
 
             <motion.div
