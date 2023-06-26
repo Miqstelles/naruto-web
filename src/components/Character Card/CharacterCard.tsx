@@ -33,8 +33,9 @@ export function CharacterCard(props: pageProp) {
             .then(response => setCharacters(response.data.characters))
             .catch(error => console.log(error))
 
+
         const timer = setTimeout(() => {
-            setLoading(false)
+            itemsData ? setLoading(false) : setLoading(true)
         }, 700)
 
         setCharacters([])
