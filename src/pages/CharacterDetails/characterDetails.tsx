@@ -5,6 +5,7 @@ import { Character, fetchCharacter } from "../../services/api";
 import { Navbar } from "../../components/Header/Navbar";
 import { Footer } from "../../components/Footer";
 import { CaretRight } from "@phosphor-icons/react";
+
 import { motion } from "framer-motion";
 
 export function CharacterDetails() {
@@ -34,27 +35,28 @@ export function CharacterDetails() {
                     const characterImg = character.images[character.images.length === 1 ? 0 : part ? 1 : 0]?.replace(/\/revision\/.*$/, '')
 
                     return (
-                        <div className="w-[330px] h-full pb-[20px] bg-[#C9683C] font-MPLUS1CODE mt-[20px] rounded-[5px]">
-                            <div className="w-full h-[44px] flex justify-between bg-white rounded-t-[5px] text-black">
-                                <div className={`${!part ? 'bg-[#C9683C] mt-[42px] w-[165px] h-[3px]' : 'w-0 ml-[77px]'} flex justify-center text-[1.25rem]`}>
-                                    <button
-                                        onClick={() => setPart(false)}
-                                        className={!part ? 'text-[#C9683C] mt-[-42px]' : 'text-black mt-1'}
-                                    >
-                                        Classic
-                                    </button>
-                                </div>
+                        <div className="w-[330px] h-full pb-[20px] bg-[#C9683C] font-MPLUS1CODE mt-[20px] rounded-[5px]" key={character.id}>
+                            {character.personal.height?.["Part I"] && character.personal.height?.["Part II"] &&
+                                <div className="w-full h-[44px] flex justify-between bg-white rounded-t-[5px] text-black">
+                                    <div className={`${!part ? 'bg-[#C9683C] mt-[42px] w-[165px] h-[3px]' : 'w-0 ml-[77px]'} flex justify-center text-[1.25rem]`}>
+                                        <button
+                                            onClick={() => setPart(false)}
+                                            className={!part ? 'text-[#C9683C] mt-[-42px]' : 'text-black mt-1'}
+                                        >
+                                            Classic
+                                        </button>
+                                    </div>
 
-                                <div className={`${part ? 'bg-[#C9683C] mt-[42px] w-[165px] h-[3px]' : 'w-0 mr-[77px]'} flex justify-center text-[1.25rem]`}>
-                                    <button
-                                        onClick={() => setPart(true)}
-                                        className={part ? 'text-[#C9683C] mt-[-42px]' : 'text-black mt-0'}
-                                    >
-                                        Shippuden
-                                    </button>
+                                    <div className={`${part ? 'bg-[#C9683C] mt-[42px] w-[165px] h-[3px]' : 'w-0 mr-[77px]'} flex justify-center text-[1.25rem]`}>
+                                        <button
+                                            onClick={() => setPart(true)}
+                                            className={part ? 'text-[#C9683C] mt-[-42px]' : 'text-black mt-0'}
+                                        >
+                                            Shippuden
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-
+                            }
                             <img src={characterImg} alt={character.name} title={character.name} className="w-full h-[291px]" />
 
                             <div className="text-white">
@@ -62,7 +64,6 @@ export function CharacterDetails() {
 
                                 <div className="grid-cols-2 mx-[10px] text-[24px]">
                                     <div className="flex justify-between">
-
                                         <p className="text-center mt-[16px]">
                                             <span className="font-bold">Clan: </span>
                                             {character.personal.clan ? character?.personal?.clan?.length >= 16 ? character.personal.clan.substring(0, 7) + "..." : character.personal.clan : 'unknown'}
@@ -125,7 +126,7 @@ export function CharacterDetails() {
 
                                             <p>
                                                 <span className="font-bold">Rank: </span>
-                                                {character.rank?.ninjaRank[part ? 'Part II' : 'Part I'] ? character.rank.ninjaRank[part ? 'Part II' : 'Part I'] : 'unknown'}
+                                                {character.rank?.ninjaRank?.[part ? 'Part II' : 'Part I'] ? character.rank.ninjaRank[part ? 'Part II' : 'Part I'] : 'unknown'}
                                             </p>
 
                                             <p>
