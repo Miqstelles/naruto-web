@@ -10,6 +10,7 @@ interface NavbarProps {
 
 export function Navbar(props: NavbarProps) {
     const [isOpen, setOpen] = useState(false)
+    const route = ['/Characters', '/Clans', '/Characters/Akatsuki', '/TailedBeasts']
 
     return (
         <nav>
@@ -37,7 +38,7 @@ export function Navbar(props: NavbarProps) {
                 {isOpen && (
                     <ul className="font-MPLUS1CODE font-bold text-white text-[2.5rem] ml-[20px] pt-[24px]">
                         {props.items.map((item, index) => (
-                            <li key={index}><Link to={`/${item}`}>{item}</Link></li>
+                            <li key={index}><Link to={route[index]}>{item}</Link></li>
                         ))}
                     </ul>
                 )}

@@ -9,7 +9,6 @@ import kunairight from '../../assets/kunairight.png'
 import { Filters } from "../../components/Filters";
 import { useSelector } from "react-redux";
 
-
 export function Characters() {
     const [page, setPage] = useState(1)
     const pageNumber = useSelector((state: any) => state.filters.pageNumbers)
@@ -28,9 +27,7 @@ export function Characters() {
             <main className="flex flex-col justify-center items-center mt-[32px] gap-[44px]">
                 <article>
                     <p className="font-MPLUS1CODE font-bold text-white text-[2.5rem] text-center">Characters</p>
-                    <Filters
-
-                    />
+                    <Filters />
                 </article>
 
                 <CharacterCard
