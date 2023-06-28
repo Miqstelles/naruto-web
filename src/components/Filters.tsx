@@ -6,6 +6,7 @@ import { setFilteredItem } from "../redux/action";
 
 import { motion } from "framer-motion";
 import { CaretDown, CaretRight, X } from "@phosphor-icons/react";
+import { useParams } from "react-router-dom";
 
 
 export function Filters() {
@@ -13,6 +14,8 @@ export function Filters() {
     const ranks = ['Genin', 'Chūnin', 'Jōnin', 'Kage']
     const kages = ['Hokage', 'Tsuchikage', 'Raikage', 'Kazekage', 'Mizukage']
     const [villages, setVillages] = useState<Village[]>([])
+
+    const { afiliaton } = useParams<{ afiliaton: any }>()
 
     useEffect(() => {
         fetchClan(`?page=1&limit=58`)
@@ -72,9 +75,10 @@ export function Filters() {
     }
 
     useEffect(() => {
-        const combinedItems = [...filteredClans, ...filteredRanks, ...filteredKages, ...filteredVillages];
+        const combinedItems = [...filteredClans, ...filteredRanks, ...filteredKages, ...filteredVillages]
+        combinedItems.push(afiliaton)
         dispatch(setFilteredItem(combinedItems));
-    }, [filteredClans, filteredRanks, filteredKages, filteredVillages, dispatch]);
+    }, [filteredClans, filteredRanks, filteredKages, filteredVillages, afiliaton]);
 
     return (
         <div>

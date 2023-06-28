@@ -33,7 +33,6 @@ export function CharacterCard(props: pageProp) {
             .then(response => setCharacters(response.data.characters))
             .catch(error => console.log(error))
 
-
         const timer = setTimeout(() => {
             setLoading(false)
         }, 2000)
@@ -59,15 +58,17 @@ export function CharacterCard(props: pageProp) {
         let filtered = characters
 
         if (filter === true && filteredItems.length > 0) {
-            filtered = characters.filter(character => {
+            filtered = characters.filter((character) => {
                 const matchesClan = filteredItems.includes(character.personal.clan)
-                const matchesAfilliation = filteredItems.includes(character.personal.affiliation)
+                const matchesAfiliation = filteredItems.includes(character.personal.affiliation)
+                const matchesAfilliation = filteredItems.includes(character.personal.affiliation?.[1])
                 const matchesRankPartOne = filteredItems.includes(character.rank?.ninjaRank?.['Part I'])
                 const matchesRankPartTwo = filteredItems.includes(character.rank?.ninjaRank?.['Part II'])
                 const matchesRankGaiden = filteredItems.includes(character.rank?.ninjaRank?.['Gaiden'])
                 const matchesKages = filteredItems.includes(character.personal.occupation)
-
-                return matchesClan || matchesAfilliation || matchesRankPartOne || matchesRankPartTwo || matchesRankGaiden || matchesKages
+                const matchesNaruto = filteredItems.includes(character.personal.occupation?.[0])
+                const matchesHashirama = filteredItems.includes(character.personal.occupation?.[1])
+                return matchesClan || matchesAfiliation || matchesAfilliation || matchesRankPartOne || matchesRankPartTwo || matchesRankGaiden || matchesKages || matchesNaruto || matchesHashirama
             })
         }
 
