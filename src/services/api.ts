@@ -87,3 +87,7 @@ export const fetchClan = axios.create({
 export const fetchVillage = axios.create({
     baseURL: "https://api.narutodb.xyz/village/"
 })
+
+export const fetchTailedBeast = axios.create({
+    baseURL: "https://api.narutodb.xyz/tailed-beast/"
+})
