@@ -100,7 +100,7 @@ export function CharacterCard(props: pageProp) {
                 const bgCard = appearsLength && appearsLength >= 32 ? isAkatsuki : 'bg-white'
 
                 return (
-                    <div key={character.id} title={character.name} className={`w-[330px] h-[219px] rounded-[5px] !shadow-2xl ${bgCard} duration-75 hover:scale-105`}>
+                    <div key={character.id} title={character.name} className={`w-[330px] h-[219px] rounded-[5px] ${bgCard} duration-75 hover:scale-105`}>
                         <Link to={`/character/${character.id}`}>
                             {character.personal?.affiliation?.includes('Akatsuki') ?
                                 <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />
@@ -127,7 +127,7 @@ export function CharacterCard(props: pageProp) {
                                             {character.personal.clan ?
                                                 <p className="font-MPLUS1CODE" title={character.personal.clan}>
                                                     <span className="font-bold">Clan: </span>
-                                                    {character?.personal?.clan[0]?.length >= 16 ? character.personal.clan.substring(0, 7) + "..." : character.personal.clan}
+                                                    {character?.personal?.clan.length >= 16 ? character.personal.clan.substring(0, 7) + "..." : character.personal.clan}
                                                 </p>
                                                 :
                                                 <p>Clan: unknown</p>
