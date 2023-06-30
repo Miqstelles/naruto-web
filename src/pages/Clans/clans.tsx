@@ -11,8 +11,10 @@ export function Clans() {
                 />
             </header>
 
-            <main>
-                <ClanCard />
+            <main className="flex justify-center mt-[24px]">
+                <div className="grid grid-cols-2 gap-x-[6px] gap-y-[25px]">
+                    <ClanCard />
+                </div>
             </main>
 
             <Footer />
