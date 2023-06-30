@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { Character, fetchCharacter } from "../../services/api";
 import { Navbar } from "../../components/Header/Navbar";
-import { Footer } from "../../components/Footer";
+import { Footer } from "../../components/Footer/Footer";
 import { CaretRight } from "@phosphor-icons/react";
 
 import { motion } from "framer-motion";

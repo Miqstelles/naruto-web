@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { CharacterCard } from "../../components/Character Card/CharacterCard";
-import { Footer } from "../../components/Footer";
+import { Footer } from "../../components/Footer/Footer";
 import { Navbar } from "../../components/Header/Navbar";
 
 import kunaileft from '../../assets/kunaileft.png'

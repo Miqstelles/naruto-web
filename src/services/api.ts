@@ -67,7 +67,9 @@ export type Character = {
 };
 
 export type Clan = {
+    id: number;
     name: string;
+    characters: Character;
 }
 
 export type Village = {

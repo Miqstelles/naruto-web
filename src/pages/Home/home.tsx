@@ -2,7 +2,7 @@ import { CharacterCard } from "../../components/Character Card/CharacterCard";
 import { Header } from "../../components/Header/Header";
 
 import narutochibi from '../../assets/narutochibi2.png'
-import { Footer } from "../../components/Footer";
+import { Footer } from "../../components/Footer/Footer";
 
 export function Home() {
     return (
