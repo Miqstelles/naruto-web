@@ -14,7 +14,9 @@ export function ClanCard() {
         <div>
             {clans.map((clan, index) => {
                 return (
-                    <p>{clan.name}</p>
+                    <div className="w-[200px] h-[50px] flex justify-center items-center bg-white border border-black rounded-[5px]" key={index}>
+                        <p className="text-center">Clan: {clan.name}</p>
+                    </div>
                 )
             })}
         </div>
