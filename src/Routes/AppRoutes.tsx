@@ -13,7 +13,7 @@ const AppRoutes = () => {
                 <Route path="/Characters/:afiliaton?" element={<Characters />} />
                 <Route path="/Character/:id" element={<CharacterDetails />} />
                 <Route path="Clans" element={<Clans />} />
-                <Route path="Tailed-Beasts" element={<TailedBeasts />} />
+                <Route path="TailedBeasts" element={<TailedBeasts />} />
             </Routes>
         </Router>
     )

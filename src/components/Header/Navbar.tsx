@@ -10,7 +10,7 @@ interface NavbarProps {
 
 export function Navbar(props: NavbarProps) {
     const [isOpen, setOpen] = useState(false)
-    const route = ['/Characters', '/Clans', '/Characters/Akatsuki', '/Tailed-Beasts']
+    const route = ['/Characters', '/Clans', '/Characters/Akatsuki', '/TailedBeasts']
 
     return (
         <nav>
