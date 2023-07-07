@@ -40,7 +40,7 @@ export function CharacterCard(props: pageProp) {
     const [itemsData, setItemsData] = useState<Character[]>([])
 
     useEffect(() => {
-        itemsData.length > 4 ? setLoading(false) : setLoading(true)
+        itemsData.length > 1 ? setLoading(false) : setLoading(true)
     }, [itemsData])
 
     const currentPage = props.page
