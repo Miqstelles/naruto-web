@@ -76,9 +76,10 @@ export function Filters() {
 
     useEffect(() => {
         const combinedItems = [...filteredClans, ...filteredRanks, ...filteredKages, ...filteredVillages]
-        combinedItems.push(afiliaton)
+        afiliaton && combinedItems.push(afiliaton)
         dispatch(setFilteredItem(combinedItems));
     }, [filteredClans, filteredRanks, filteredKages, filteredVillages, afiliaton]);
+
 
     return (
         <div>
