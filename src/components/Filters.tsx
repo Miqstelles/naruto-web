@@ -13,6 +13,8 @@ export function Filters() {
     const [clans, setClans] = useState<Clan[]>([])
     const ranks = ['Genin', 'Chūnin', 'Jōnin', 'Kage']
     const kages = ['Hokage', 'Tsuchikage', 'Raikage', 'Kazekage', 'Mizukage']
+    const tailedBeasts = [1, 153, 345, 480, 669, 711, 771, 1009, 1127, 1134]
+
     const [villages, setVillages] = useState<Village[]>([])
 
     const { afiliaton } = useParams<{ afiliaton: any }>()
@@ -75,11 +77,11 @@ export function Filters() {
     }
 
     useEffect(() => {
-        const combinedItems = [...filteredClans, ...filteredRanks, ...filteredKages, ...filteredVillages]
+        const combinedItems: any = [...filteredClans, ...filteredRanks, ...filteredKages, ...filteredVillages]
+        location.pathname === '/TailedBeasts' && combinedItems.push(...tailedBeasts)
         afiliaton && combinedItems.push(afiliaton)
         dispatch(setFilteredItem(combinedItems));
-    }, [filteredClans, filteredRanks, filteredKages, filteredVillages, afiliaton]);
-
+    }, [filteredClans, filteredRanks, filteredKages, filteredVillages, afiliaton])
 
     return (
         <div>

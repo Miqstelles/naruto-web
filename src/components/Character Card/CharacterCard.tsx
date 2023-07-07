@@ -66,7 +66,8 @@ export function CharacterCard(props: pageProp) {
                 const matchesKages = filteredItems.includes(character.personal.occupation)
                 const matchesNaruto = filteredItems.includes(character.personal.occupation?.[0])
                 const matchesHashirama = filteredItems.includes(character.personal.occupation?.[1])
-                return matchesClan || matchesAfiliation || matchesAfilliation || matchesRankPartOne || matchesRankPartTwo || matchesRankGaiden || matchesKages || matchesNaruto || matchesHashirama
+                const matchesTailedBeasts = filteredItems.includes(character.id)
+                return matchesClan || matchesAfiliation || matchesAfilliation || matchesRankPartOne || matchesRankPartTwo || matchesRankGaiden || matchesKages || matchesNaruto || matchesHashirama || matchesTailedBeasts
             })
         }
         setItemsData(filtered)
