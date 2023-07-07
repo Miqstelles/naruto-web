@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { fetchCharacter, Character } from '../../services/api'
 import { CharacterInfoImg } from '../CharacterInfoImg'
-import { Skeleton } from '../Skeleton'
+import { SkeletonCharacterCard } from '../Skeletons/SkeletonCharacterCard'
 
 import Akatsuki from '../../assets/akatsuki.png'
 import Tsuchikage from '../../assets/tsuchikage.svg'
@@ -82,7 +82,7 @@ export function CharacterCard(props: pageProp) {
         <div className="grid gap-[20px]">
             {loading &&
                 Array.from(Array(5), (_, i) =>
-                    <Skeleton key={i} />
+                    <SkeletonCharacterCard key={i} />
                 )
             }
 

@@ -1,4 +1,4 @@
-export function Skeleton() {
+export function SkeletonCharacterCard() {
     return (
         <div role="status" className="w-[330px] h-[219px] rounded-[5px] dark:bg-[#b87f65] animate-pulse transition-opacity duration-500">
             <div className="w-[330px] h-[132px] dark:bg-[#e9a07f] rounded-t-[5px]"></div>

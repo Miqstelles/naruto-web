@@ -7,6 +7,7 @@ import { Footer } from "../../components/Footer/Footer";
 import { CaretRight } from "@phosphor-icons/react";
 
 import { motion } from "framer-motion";
+import { SkeletonCharacterDetail } from "../../components/Skeletons/SkeletonCharacterDetail";
 
 export function CharacterDetails() {
     const { id } = useParams<{ id: string }>()
@@ -16,10 +17,17 @@ export function CharacterDetails() {
     const page = ['Personal', 'Jutsus']
     const [currentPage, setCurrentPage] = useState(0)
 
+    const [loading, setLoading] = useState(false)
+
     useEffect(() => {
+        setLoading(true)
         fetchCharacter(`?page=${Number(id) + 1}&limit=1`)
             .then(response => setCharacter(response.data.characters))
             .catch(error => console.log(error))
+    })
+
+    useEffect(() => {
+        character.length >= 1 ? setLoading(false) : setLoading(true)
     })
 
     return (
@@ -31,7 +39,9 @@ export function CharacterDetails() {
             </header>
 
             <main className="flex justify-center items-center ">
-                {character && character.map(character => {
+                {loading && <SkeletonCharacterDetail />}
+
+                {!loading && character.map(character => {
                     const characterImg = character.images[character.images.length === 1 ? 0 : part ? 1 : 0]?.replace(/\/revision\/.*$/, '')
 
                     return (

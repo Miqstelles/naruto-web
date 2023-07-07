@@ -31,7 +31,7 @@ export function Characters() {
                     <p className="font-MPLUS1CODE font-bold text-white text-[2.5rem] text-center">
                         {afiliaton ? afiliaton : 'Characters'}
                     </p>
-                    <Filters />
+                    <div className={afiliaton && 'hidden'}><Filters /></div>
                 </article>
 
                 <CharacterCard
