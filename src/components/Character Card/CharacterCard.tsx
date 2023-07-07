@@ -12,6 +12,7 @@ import Hokage from '../../assets/hokage.svg'
 import Raikage from '../../assets/raikage.svg'
 import Kazekage from '../../assets/kazekage.svg'
 import Mizukage from '../../assets/mizukage.svg'
+
 import { setPageNumber } from '../../redux/action'
 
 interface pageProp {
@@ -32,18 +33,15 @@ export function CharacterCard(props: pageProp) {
         fetchCharacter(`?page=1&limit=1424`)
             .then(response => setCharacters(response.data.characters))
             .catch(error => console.log(error))
-
-        const timer = setTimeout(() => {
-            setLoading(false)
-        }, 2000)
-
         setCharacters([])
 
-        return () => clearTimeout(timer)
     }, [filteredItems])
 
-
     const [itemsData, setItemsData] = useState<Character[]>([])
+
+    useEffect(() => {
+        itemsData.length > 4 ? setLoading(false) : setLoading(true)
+    }, [itemsData])
 
     const currentPage = props.page
     const itemsPerPage = props.limit
@@ -71,7 +69,6 @@ export function CharacterCard(props: pageProp) {
                 return matchesClan || matchesAfiliation || matchesAfilliation || matchesRankPartOne || matchesRankPartTwo || matchesRankGaiden || matchesKages || matchesNaruto || matchesHashirama
             })
         }
-
         setItemsData(filtered)
     }, [filteredItems, characters])
 
