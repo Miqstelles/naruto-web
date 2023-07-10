@@ -24,6 +24,7 @@ interface pageProp {
 export function CharacterCard(props: pageProp) {
     const [characters, setCharacters] = useState<Character[]>([])
     const [loading, setLoading] = useState(false)
+    const part = true
 
     const filteredItems = useSelector((state: any) => state.filters.filteredItems)
 
@@ -40,7 +41,7 @@ export function CharacterCard(props: pageProp) {
     const [itemsData, setItemsData] = useState<Character[]>([])
 
     useEffect(() => {
-        itemsData.length > 1 ? setLoading(false) : setLoading(true)
+        itemsData.length > 0 ? setLoading(false) : setLoading(true)
     }, [itemsData])
 
     const currentPage = props.page
@@ -73,6 +74,12 @@ export function CharacterCard(props: pageProp) {
         setItemsData(filtered)
     }, [filteredItems, characters])
 
+    const characterName = useSelector((state: any) => state.filters.characterName)
+
+    useEffect(() => {
+        setItemsData(characters.filter(item => item.name.toLowerCase().includes(characterName)))
+    }, [characterName])
+
     useEffect(() => {
         dispatch(setPageNumber(Math.ceil(itemsData.length / itemsPerPage)))
     }, [itemsData, filteredItems])
@@ -91,24 +98,23 @@ export function CharacterCard(props: pageProp) {
                 const characterImg = character.images[character.images.length === 1 ? 0 : 1]?.replace(/\/revision\/.*$/, '')
 
                 const appearsLength = character && character.debut && character?.debut?.appearsIn?.length
-                const isAkatsuki = character && character.personal && character?.personal?.affiliation?.includes('Akatsuki') ?
-                    'text-white bg-gradient-to-r from-[#C93636] via-[#E17A7A] to-[#E13434]'
-                    :
-                    'text-white bg-gradient-to-r from-[#C9683C] via-[#DB8F6C] to-[#F07942]'
+
+                const isAkatsuki = character && character.personal && character?.personal?.affiliation?.includes('Akatsuki')
+                    ? 'text-white bg-gradient-to-r from-[#C93636] via-[#E17A7A] to-[#E13434]'
+                    : 'text-white bg-gradient-to-r from-[#C9683C] via-[#DB8F6C] to-[#F07942]'
+
                 const bgCard = appearsLength && appearsLength >= 32 ? isAkatsuki : 'bg-white'
 
                 return (
                     <div key={character.id} title={character.name} className={`w-[330px] h-[219px] rounded-[5px] ${bgCard} duration-75 hover:scale-105`}>
                         <Link to={`/character/${character.id}`}>
-                            {character.personal?.affiliation?.includes('Akatsuki') ?
-                                <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />
-                                :
-                                character.personal.occupation?.includes('Hokage') ? <CharacterInfoImg src={Hokage} alt="Hokage Logo" title="Hokage" />
-                                    : character.personal.occupation?.includes('Kazekage') ? <CharacterInfoImg src={Kazekage} alt="Kazekage Logo" title="Kazekage" /> :
-                                        character.personal.occupation?.includes('Raikage') ? <CharacterInfoImg src={Raikage} alt="Raikage Logo" title="Raikage" /> :
-                                            character.personal.occupation?.includes('Tsuchikage') ? <CharacterInfoImg src={Tsuchikage} alt="Tsuchikage Logo" title="Tsuchikage" /> :
-                                                character.personal.occupation?.includes('Mizukage') ? <CharacterInfoImg src={Mizukage} alt="Mizukage Logo" title="Mizukage" /> : null
-                            }
+                            {character.personal?.affiliation?.includes('Akatsuki') && <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />}
+                            {character.personal.occupation?.includes('Hokage') && <CharacterInfoImg src={Hokage} alt="Hokage Logo" title="Hokage" />}
+                            {character.personal.occupation?.includes('Kazekage') && <CharacterInfoImg src={Kazekage} alt="Kazekage Logo" title="Kazekage" />}
+                            {character.personal.occupation?.includes('Raikage') && <CharacterInfoImg src={Raikage} alt="Raikage Logo" title="Raikage" />}
+                            {character.personal.occupation?.includes('Tsuchikage') && <CharacterInfoImg src={Tsuchikage} alt="Tsuchikage Logo" title="Tsuchikage" />}
+                            {character.personal.occupation?.includes('Mizukage') && <CharacterInfoImg src={Mizukage} alt="Mizukage Logo" title="Mizukage" />}
+
                             {character && (
                                 <>
                                     <div
@@ -134,7 +140,14 @@ export function CharacterCard(props: pageProp) {
 
                                         <div className="flex justify-between items-center">
                                             {character.personal.age ?
-                                                <p className="font-MPLUS1CODE"><span className="font-bold">Age: </span>{character.personal.age['Part II'] ? character.personal.age['Part II'] : character.personal.age['Part I']}</p>
+                                                <p className="font-MPLUS1CODE"><span className="font-bold">Age: </span>
+                                                    {character.personal.age
+                                                        ? character.personal.age[part ? 'Part II' : 'Part I']
+                                                            ? character.personal.age[part ? 'Part II' : 'Part I']
+                                                            : 'unknown'
+                                                        : 'unknown'
+                                                    }
+                                                </p>
                                                 :
                                                 <p>Age: unknown</p>
                                             }
