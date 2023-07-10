@@ -25,6 +25,11 @@ export const filtersReducer: Reducer<FilterState> = (
                 ...state,
                 pageNumbers: action.payload,
             };
+        case 'SET_CHARACTER_NAME':
+            return {
+                ...state,
+                characterName: action.payload,
+            };
         default:
             return state;
     }
