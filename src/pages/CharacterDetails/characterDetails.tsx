@@ -81,7 +81,12 @@ export function CharacterDetails() {
 
                                         <p className="text-center mt-[16px]">
                                             <span className="font-bold">Age: </span>
-                                            {character.personal.age ? character.personal.age[part ? 'Part II' : 'Part I'] : 'unknown'}
+                                            {character.personal.age
+                                                ? character.personal.age[part ? 'Part II' : 'Part I']
+                                                    ? character.personal.age[part ? 'Part II' : 'Part I']
+                                                    : 'unknown'
+                                                : 'unknown'
+                                            }
                                         </p>
 
                                     </div>

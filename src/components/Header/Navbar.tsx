@@ -1,8 +1,9 @@
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import { Squash } from "hamburger-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Input } from "../Input";
 
 interface NavbarProps {
     items: string[];
@@ -12,12 +13,17 @@ export function Navbar(props: NavbarProps) {
     const [isOpen, setOpen] = useState(false)
     const route = ['/Characters', '/Clans', '/Characters/Akatsuki', '/TailedBeasts']
 
+    const [search, setSearch] = useState(false)
+
     return (
         <nav>
-            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row ' : 'flex border-b-[2px]'} justify-center items-center gap-[72px]`}>
+            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row' : 'flex border-b-[2px]'} justify-center items-center gap-[72px]`}>
                 <button
                     className={`w-[50px] h-[50px] ${isOpen && 'mt-[14px] ml-[20px]'}`}
-                    onClick={isOpen ? () => setOpen(false) : () => setOpen(true)}
+                    onClick={isOpen
+                        ? () => setOpen(false)
+                        : () => { setOpen(true), setSearch(false) }
+                    }
                 >
                     <Squash color="#fff" size={40} />
                 </button>
@@ -26,7 +32,21 @@ export function Navbar(props: NavbarProps) {
                     <Link to={'/'}>N<span className="text-[#C9683C]">WEB</span></Link>
                 </p>
 
-                <MagnifyingGlass color="#fff" size={40} className={`${isOpen && 'hidden'}`} />
+                <button
+                    className={`w-[50px] h-[50px] ${isOpen && 'mt-[14px] ml-[20px]'}`}
+                    onClick={search
+                        ? () => setSearch(false)
+                        : () => {
+                            location.pathname === '/Characters' && setSearch(true), setOpen(false)
+                            location.pathname != '/Characters' && location.replace('/Characters')
+                        }
+                    }
+                >
+                    {!search
+                        ? <MagnifyingGlass color="#fff" size={40} className={`${isOpen && 'hidden'}`} />
+                        : <X color="#fff" size={40} className={`${isOpen && 'hidden'}`} />
+                    }
+                </button>
             </div>
 
             <motion.div
@@ -43,6 +63,10 @@ export function Navbar(props: NavbarProps) {
                     </ul>
                 )}
             </motion.div>
+
+            <Input
+                search={search}
+            />
         </nav>
     )
 }
