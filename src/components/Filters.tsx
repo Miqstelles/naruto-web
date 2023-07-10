@@ -31,7 +31,6 @@ export function Filters() {
             .catch(error => console.log(error))
     }, [])
 
-
     const dispatch = useDispatch()
 
     const [isOpen, setOpen] = useState(false)

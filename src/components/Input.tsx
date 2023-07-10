@@ -10,7 +10,7 @@ export function Input(props: InputProps) {
     const dispatch = useDispatch()
 
     const handleCheckboxClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setCharacterName(event.target.value))
+        dispatch(setCharacterName(event.target.value.toLowerCase()))
     }
 
     return (
