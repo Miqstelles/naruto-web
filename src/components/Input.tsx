@@ -16,8 +16,8 @@ export function Input(props: InputProps) {
     return (
         <motion.div
             className={`flex justify-center ${!props.search && 'hidden'}`}
-            initial={{ opacity: 1, y: props.search && location.pathname === '/Characters' ? 0 : -40 }}
-            animate={{ opacity: props.search && location.pathname === '/Characters' ? 1 : 0, y: props.search ? 0 : -40 }}
+            initial={{ opacity: 1, y: props.search ? 0 : -40 }}
+            animate={{ opacity: props.search ? 1 : 0, y: props.search ? 0 : -40 }}
             transition={{ duration: 0.4 }}
         >
             <input

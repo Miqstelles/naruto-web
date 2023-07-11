@@ -13,7 +13,7 @@ export function Navbar(props: NavbarProps) {
     const [isOpen, setOpen] = useState(false)
     const route = ['/Characters', '/Clans', '/Characters/Akatsuki', '/TailedBeasts']
 
-    const [search, setSearch] = useState(false)
+    const [search, setSearch] = useState(location.pathname === '/Characters' ? true : false)
 
     return (
         <nav>

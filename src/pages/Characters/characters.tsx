@@ -20,17 +20,19 @@ export function Characters() {
     }, [pageNumber])
 
     return (
-        <div className="bg-[#343434] w-full h-full">
+        <div className="w-full h-full">
             <header>
                 <Navbar
                     items={['Characters', 'Clans', 'Akatsuki', 'Tailed Beasts']}
                 />
             </header>
-            <main className="flex flex-col justify-center items-center mt-[32px] gap-[44px]">
+
+            <main className="h-full flex flex-col justify-center items-center mt-[32px] gap-[44px]">
                 <article>
                     <p className="font-MPLUS1CODE font-bold text-white text-[2.5rem] text-center">
                         {afiliaton ? afiliaton : 'Characters'}
                     </p>
+
                     <div className={afiliaton && 'hidden'}><Filters /></div>
                 </article>
 
@@ -48,6 +50,7 @@ export function Characters() {
                     <div className={page >= pageNumber ? 'invisible' : ''}><button onClick={() => page >= pageNumber ? setPage(1) : setPage(page + 1)}><img src={kunairight} alt="" height="20px" /></button></div>
                 </div>
             </main>
+
             <Footer />
         </div >
     )
