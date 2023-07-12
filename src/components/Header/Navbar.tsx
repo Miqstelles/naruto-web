@@ -1,4 +1,4 @@
-import { MagnifyingGlass, X } from "@phosphor-icons/react";
+import { GithubLogo, LinkedinLogo, MagnifyingGlass, X } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import { Squash } from "hamburger-react";
 import { useState } from "react";
@@ -17,9 +17,9 @@ export function Navbar(props: NavbarProps) {
 
     return (
         <nav>
-            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row' : 'flex border-b-[2px]'} justify-center items-center gap-[72px]`}>
+            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row' : 'flex border-b-[2px]'} justify-center md1:justify-evenly lg:justify-center items-center gap-[72px]`}>
                 <button
-                    className={`w-[50px] h-[50px] ${isOpen && 'mt-[14px] ml-[20px]'}`}
+                    className={`w-[50px] h-[50px] ${isOpen && 'mt-[14px] ml-[20px]'} lg:hidden`}
                     onClick={isOpen
                         ? () => setOpen(false)
                         : () => { setOpen(true), setSearch(false) }
@@ -31,6 +31,18 @@ export function Navbar(props: NavbarProps) {
                 <p className={`text-white font-Lexend text-[2.5rem]  ${isOpen && 'hidden'}`}>
                     <Link to={'/'}>N<span className="text-[#C9683C]">WEB</span></Link>
                 </p>
+
+                <p className="h-[90px] hidden justify-center items-center gap-[14px] lg:flex">
+                    <p className="font-MPLUS1CODE text-[1.5rem] text-[#C9683C]">by miqstelles</p>
+                    <a href="https://github.com/miqstelles" target="_blank"><GithubLogo size={32} color="#C9683C" /></a>
+                    <a href="https://linkedin.com/in/miquéiastelles" target="_blank"><LinkedinLogo size={32} color="#C9683C" /></a>
+                </p>
+
+                <ul className="font-MPLUS1CODE hidden gap-[50px] text-white text-[2.25rem] lg:flex">
+                    {props.items.map((item, index) => (
+                        <li key={index}><Link to={route[index]}>{item}</Link></li>
+                    ))}
+                </ul>
 
                 <button
                     className={`w-[50px] h-[50px] ${isOpen && 'mt-[14px] ml-[20px]'}`}

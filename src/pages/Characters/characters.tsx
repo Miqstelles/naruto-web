@@ -38,7 +38,7 @@ export function Characters() {
 
                 <CharacterCard
                     page={page}
-                    limit={5}
+                    limit={6}
                     filter={true}
                 />
 

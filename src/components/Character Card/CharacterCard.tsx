@@ -87,9 +87,9 @@ export function CharacterCard(props: pageProp) {
     const currentItems = itemsData.slice(firstIndex, lastIndex)
 
     return (
-        <div className="grid gap-[20px]">
+        <div className="grid md1:grid-cols-2 md3:grid-cols-3 gap-[30px] md3:gap-[40px]">
             {loading &&
-                Array.from(Array(5), (_, i) =>
+                Array.from(Array(6), (_, i) =>
                     <SkeletonCharacterCard key={i} />
                 )
             }
@@ -107,7 +107,7 @@ export function CharacterCard(props: pageProp) {
 
                 return (
                     <div key={character.id} title={character.name} className={`w-[330px] h-[219px] rounded-[5px] ${bgCard} duration-75 hover:scale-105`}>
-                        <Link to={`/character/${character.id}`}>
+                        <Link to={`/Character/${character.id}`}>
                             {character.personal?.affiliation?.includes('Akatsuki') && <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />}
                             {character.personal.occupation?.includes('Hokage') && <CharacterInfoImg src={Hokage} alt="Hokage Logo" title="Hokage" />}
                             {character.personal.occupation?.includes('Kazekage') && <CharacterInfoImg src={Kazekage} alt="Kazekage Logo" title="Kazekage" />}
