@@ -19,6 +19,24 @@ export function Characters() {
         setPage(1)
     }, [pageNumber])
 
+    const [pageWidth, setPageWidth] = useState(0)
+    const [screenSize, getDimension] = useState({
+        dynamicWidth: window.innerWidth,
+    });
+
+    const setDimension = () => {
+        getDimension({
+            dynamicWidth: window.innerWidth
+        })
+    }
+
+    useEffect(() => {
+        addEventListener('resize', setDimension);
+        setPageWidth(screenSize.dynamicWidth)
+        return (() => {
+            removeEventListener('resize', setDimension);
+        })
+    })
     return (
         <div className="w-full h-full">
             <header>
@@ -38,7 +56,7 @@ export function Characters() {
 
                 <CharacterCard
                     page={page}
-                    limit={6}
+                    limit={pageWidth < 1440 ? 6 : 8}
                     filter={true}
                 />
 

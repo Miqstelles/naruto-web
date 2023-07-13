@@ -17,7 +17,7 @@ export function Navbar(props: NavbarProps) {
 
     return (
         <nav>
-            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row' : 'flex border-b-[2px]'} justify-center md1:justify-evenly lg:justify-center items-center gap-[72px]`}>
+            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row' : 'flex border-b-[2px]'} justify-center md1:justify-evenly lg:justify-center items-center gap-[72px] lg:gap-[52px]`}>
                 <button
                     className={`w-[50px] h-[50px] ${isOpen && 'mt-[14px] ml-[20px]'} lg:hidden`}
                     onClick={isOpen
@@ -32,13 +32,13 @@ export function Navbar(props: NavbarProps) {
                     <Link to={'/'}>N<span className="text-[#C9683C]">WEB</span></Link>
                 </p>
 
-                <p className="h-[90px] hidden justify-center items-center gap-[14px] lg:flex">
+                <div className="h-[90px] hidden justify-center items-center gap-[14px] lg:flex">
                     <p className="font-MPLUS1CODE text-[1.5rem] text-[#C9683C]">by miqstelles</p>
                     <a href="https://github.com/miqstelles" target="_blank"><GithubLogo size={32} color="#C9683C" /></a>
                     <a href="https://linkedin.com/in/miquéiastelles" target="_blank"><LinkedinLogo size={32} color="#C9683C" /></a>
-                </p>
+                </div>
 
-                <ul className="font-MPLUS1CODE hidden gap-[50px] text-white text-[2.25rem] lg:flex">
+                <ul className="font-MPLUS1CODE hidden gap-[50px] text-white  lg:flex lg:text-[1.50rem] lg1:text-[2.25rem]">
                     {props.items.map((item, index) => (
                         <li key={index}><Link to={route[index]}>{item}</Link></li>
                     ))}
