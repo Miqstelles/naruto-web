@@ -3,17 +3,8 @@ import { Header } from "../../components/Header/Header";
 
 import narutochibi from '../../assets/narutochibi2.png'
 import { Footer } from "../../components/Footer/Footer";
-import { useEffect, useState } from "react";
-import { usePageSize } from "../../functions/pageSize";
 
 export function Home() {
-    const [pageWidth, setPageWidth] = useState(0)
-
-    const dynamicWidth = usePageSize()
-
-    useEffect(() => {
-        setPageWidth(dynamicWidth)
-    })
 
     return (
         <div className="bg-[#343434] w-full h-full">
@@ -32,7 +23,7 @@ export function Home() {
                     <div className="mt-[32px]">
                         <CharacterCard
                             page={Math.floor(Math.random() * 250)}
-                            limit={pageWidth < 1440 ? 6 : 8}
+                            limit={6}
                             filter={false}
                         />
                     </div>
