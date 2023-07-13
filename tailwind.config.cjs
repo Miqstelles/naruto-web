@@ -19,7 +19,7 @@ module.exports = {
         md3: '1280px',
         lg1: '1366px',
         lg2: '1440px',
-        lg2: '1920px'
+        lg3: '1920px'
       }
     },
   },
