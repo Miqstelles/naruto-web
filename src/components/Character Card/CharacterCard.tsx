@@ -14,6 +14,7 @@ import Kazekage from '../../assets/kazekage.svg'
 import Mizukage from '../../assets/mizukage.svg'
 
 import { setPageNumber } from '../../redux/action'
+import { usePageSize } from '../../functions/pageSize';
 
 interface pageProp {
     page: number
@@ -86,10 +87,18 @@ export function CharacterCard(props: pageProp) {
 
     const currentItems = itemsData.slice(firstIndex, lastIndex)
 
+    const [pageWidth, setPageWidth] = useState(0)
+
+    const dynamicWidth = usePageSize()
+
+    useEffect(() => {
+        setPageWidth(dynamicWidth)
+    })
+
     return (
         <div className="grid md1:grid-cols-2 md2:grid-cols-3 lg2:grid-cols-4 gap-[30px] md3:gap-[40px]">
             {loading &&
-                Array.from(Array(6), (_, i) =>
+                Array.from(Array(pageWidth < 1440 ? 6 : 8), (_, i) =>
                     <SkeletonCharacterCard key={i} />
                 )
             }
