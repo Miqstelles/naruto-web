@@ -21,7 +21,8 @@ export function Input(props: InputProps) {
             transition={{ duration: 0.4 }}
         >
             <input
-                className={`w-[390px] h-[80px] text-[1.5rem] rounded focus: mt-[20px] px-4 border-2 border-black font-MPLUS1CODE bg-[#dfd7d7] ${props.search ? 'absolute z-[2]' : 'hidden'}`}
+                className={`w-[300px] sm2:w-[350px] md1:w-[460px] text-center, h-[80px] text-[1.5rem] rounded focus: mt-[20px] px-4 border-2 border-black font-MPLUS1CODE bg-[#dfd7d7] 
+                ${props.search ? 'absolute z-[2]' : 'hidden'}`}
                 onInput={handleCheckboxClick}
                 placeholder={`Search some ${location.pathname === '/Characters' ? 'character' : 'clan'}`}
                 onKeyDown={(event: any) => {

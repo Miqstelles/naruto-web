@@ -106,7 +106,7 @@ export function CharacterCard(props: pageProp) {
                 const bgCard = appearsLength && appearsLength >= 32 ? isAkatsuki : 'bg-white'
 
                 return (
-                    <div key={character.id} title={character.name} className={`w-[330px] h-[219px] rounded-[5px] ${bgCard} duration-75 hover:scale-105`}>
+                    <div key={character.id} title={character.name} className={`w-[290px] h-[219px] sm2:w-[330px] rounded-[5px] ${bgCard} duration-75 hover:scale-105`}>
                         <Link to={`/Character/${character.id}`}>
                             {character.personal?.affiliation?.includes('Akatsuki') && <img src={Akatsuki} alt="Akatsuki Logo" title="Akatsuki" className="w-[74px] rotate-[-104.85deg] absolute mt-[-38px] ml-[-10px]" />}
                             {character.personal.occupation?.includes('Hokage') && <CharacterInfoImg src={Hokage} alt="Hokage Logo" title="Hokage" />}
@@ -118,7 +118,7 @@ export function CharacterCard(props: pageProp) {
                             {character && (
                                 <>
                                     <div
-                                        className="w-[330px] h-[132px] rounded-t-[5px] bg-no-repeat bg-center bg-cover"
+                                        className="w-[290px] sm2:w-[330px] h-[132px] rounded-t-[5px] bg-no-repeat bg-center bg-cover"
                                         style={{ backgroundImage: `url(${characterImg})` }}
                                     />
 

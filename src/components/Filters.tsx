@@ -85,7 +85,7 @@ export function Filters() {
     return (
         <div>
             <div
-                className="w-[330px] h-[83px] bg-[#C9683C] rounded-t-[5px] flex justify-between items-center px-[28px] mt-[44px]"
+                className="w-[330px] h-[83px] sm1:w-[300px] md1:w-[450px] bg-[#C9683C] rounded-t-[5px] flex justify-between items-center px-[28px] mt-[44px]"
                 onClick={isOpen ? () => setOpen(false) : () => setOpen(true)}
             >
                 <p className="font-MPLUS1CODE font-bold text-[2.5rem] text-white">Filters</p>
@@ -101,7 +101,7 @@ export function Filters() {
                 initial={{ opacity: 1, y: isOpen ? 0 : -40 }}
                 animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -40 }}
                 transition={{ duration: 0.4 }}
-                className={`w-[330px] h-[272px] bg-[#C9683C] rounded-b-[5px]  ${!isOpen && 'hidden'}`}
+                className={`w-[330px] h-[272px] sm1:w-[300px] md1:w-[450px] bg-[#C9683C] rounded-b-[5px]  ${!isOpen && 'hidden'}`}
             >
                 {isOpen && (
                     <div className="flex justify-between mx-[20px] pt-[24px]">
@@ -116,7 +116,7 @@ export function Filters() {
                                 )
                             })}
                             <button
-                                className="mt-[15px] w-full h-[50px] bg-[#AD3C23] text-[32px] font-bold"
+                                className="mt-[15px] w-[80px] h-[50px] sm2:w-full bg-[#AD3C23] text-[32px] sm1:text-[24px]  font-bold"
                                 onClick={() => {
                                     setFilteredClans([])
                                     setFilteredRanks([])
@@ -128,7 +128,7 @@ export function Filters() {
                             </button>
                         </ul>
 
-                        <div className="w-[168px] h-[230px] bg-[#E99671] rounded-[5px] overflow-y-scroll pt-[16px] pb-[16px]">
+                        <div className="w-[168px] h-[230px] md1:w-[230px] bg-[#E99671] rounded-[5px] overflow-y-scroll pt-[16px] pb-[16px]">
                             {listOpen === 0 && clans.map((clan, index) => {
                                 return (
                                     <div className="flex items-center pl-[14px] gap-[14px]" key={index}>
@@ -137,7 +137,7 @@ export function Filters() {
                                             checked={filteredClans.includes(clan.name)}
                                         />
 
-                                        <label className="font-MPLUS1CODE text-[16px] text-white">
+                                        <label className="font-MPLUS1CODE text-[16px] md1:text-[24px] text-white">
                                             {clan.name.length >= 16 ? clan.name.substring(0, 7) + "..." : clan.name}
                                         </label>
                                     </div>
@@ -153,7 +153,7 @@ export function Filters() {
                                             checked={filteredRanks.includes(rank)}
                                         />
 
-                                        <label className="font-MPLUS1CODE text-[16px] text-white">
+                                        <label className="font-MPLUS1CODE text-[16px] md1:text-[24px] text-white">
                                             {rank.length >= 16 ? rank.substring(0, 7) + "..." : rank}
                                         </label>
                                     </div>
@@ -169,7 +169,7 @@ export function Filters() {
                                             checked={filteredVillages.includes(village.name)}
                                         />
 
-                                        <label className="font-MPLUS1CODE text-[16px] text-white">
+                                        <label className="font-MPLUS1CODE text-[16px] md1:text-[24px] text-white">
                                             {village.name.length >= 15 ? village.name.substring(0, 7) + "..." : village.name}
                                         </label>
                                     </div>
@@ -185,7 +185,7 @@ export function Filters() {
                                             checked={filteredKages.includes(kage)}
                                         />
 
-                                        <label className="font-MPLUS1CODE text-[16px] text-white">
+                                        <label className="font-MPLUS1CODE text-[16px] md1:text-[24px] text-white">
                                             {kage.length >= 15 ? kage.substring(0, 7) + "..." : kage}
                                         </label>
                                     </div>

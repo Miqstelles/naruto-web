@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import { CharacterCard } from "../../components/Character Card/CharacterCard";
 import { Footer } from "../../components/Footer/Footer";
 import { Navbar } from "../../components/Header/Navbar";
+import { Filters } from "../../components/Filters";
 
 import kunaileft from '../../assets/kunaileft.png'
 import kunairight from '../../assets/kunairight.png'
-import { Filters } from "../../components/Filters";
+
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { usePageSize } from "../../functions/pageSize";
 
 export function Characters() {
     const [page, setPage] = useState(1)
@@ -20,23 +22,13 @@ export function Characters() {
     }, [pageNumber])
 
     const [pageWidth, setPageWidth] = useState(0)
-    const [screenSize, getDimension] = useState({
-        dynamicWidth: window.innerWidth,
-    });
 
-    const setDimension = () => {
-        getDimension({
-            dynamicWidth: window.innerWidth
-        })
-    }
+    const dynamicWidth = usePageSize()
 
     useEffect(() => {
-        addEventListener('resize', setDimension);
-        setPageWidth(screenSize.dynamicWidth)
-        return (() => {
-            removeEventListener('resize', setDimension);
-        })
+        setPageWidth(dynamicWidth)
     })
+
     return (
         <div className="w-full h-full">
             <header>

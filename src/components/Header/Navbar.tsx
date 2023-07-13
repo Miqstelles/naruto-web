@@ -17,7 +17,7 @@ export function Navbar(props: NavbarProps) {
 
     return (
         <nav>
-            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row' : 'flex border-b-[2px]'} justify-center md1:justify-evenly lg:justify-center items-center gap-[72px] lg:gap-[52px]`}>
+            <div className={`bg-[#1E1D1D] w-full h-[68px] ${isOpen ? 'flex-row' : 'flex border-b-[2px]'} justify-center md1:justify-evenly lg:justify-center items-center gap-[32px] sm2:gap-[68px] lg:gap-[52px]`}>
                 <button
                     className={`w-[50px] h-[50px] ${isOpen && 'mt-[14px] ml-[20px]'} lg:hidden`}
                     onClick={isOpen
