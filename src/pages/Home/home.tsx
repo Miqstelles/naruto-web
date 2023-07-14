@@ -1,8 +1,8 @@
 import { CharacterCard } from "../../components/Character Card/CharacterCard";
 import { Header } from "../../components/Header/Header";
+import { Footer } from "../../components/Footer/Footer";
 
 import narutochibi from '../../assets/narutochibi2.png'
-import { Footer } from "../../components/Footer/Footer";
 
 export function Home() {
 
@@ -23,7 +23,7 @@ export function Home() {
                     <div className="mt-[32px]">
                         <CharacterCard
                             page={Math.floor(Math.random() * 250)}
-                            limit={6}
+                            limit={innerWidth < 1440 ? 6 : 8}
                             filter={false}
                         />
                     </div>

@@ -38,7 +38,7 @@ export function Characters() {
 
                 <CharacterCard
                     page={page}
-                    limit={6}
+                    limit={innerWidth < 1440 ? 6 : 8}
                     filter={true}
                 />
 
