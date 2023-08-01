@@ -5,7 +5,6 @@ import { Footer } from "../../components/Footer/Footer";
 import narutochibi from '../../assets/narutochibi2.png'
 
 export function Home() {
-
     return (
         <div className="bg-[#343434] w-full h-full">
             <Header />
@@ -23,7 +22,7 @@ export function Home() {
                     <div className="mt-[32px]">
                         <CharacterCard
                             page={Math.floor(Math.random() * 250)}
-                            limit={innerWidth < 1440 ? 6 : 8}
+                            limit={6}
                             filter={false}
                         />
                     </div>

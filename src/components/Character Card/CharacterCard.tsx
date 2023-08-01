@@ -87,9 +87,9 @@ export function CharacterCard(props: pageProp) {
     const currentItems = itemsData.slice(firstIndex, lastIndex)
 
     return (
-        <div className="grid md1:grid-cols-2 md2:grid-cols-3 lg2:grid-cols-4 gap-[30px] md3:gap-[40px]">
+        <div className="grid md1:grid-cols-2 md2:grid-cols-3 lg2:grid-cols-3 gap-[30px] md3:gap-[40px]">
             {loading &&
-                Array.from(Array(innerWidth < 1440 ? 6 : 8), (_, i) =>
+                Array.from(Array(6), (_, i) =>
                     <SkeletonCharacterCard key={i} />
                 )
             }
