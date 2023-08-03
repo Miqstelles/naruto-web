@@ -116,7 +116,7 @@ export function Filters() {
                                 )
                             })}
                             <button
-                                className="mt-[15px] w-[80px] h-[50px] sm2:w-full bg-[#AD3C23] text-[32px] sm1:text-[24px]  font-bold"
+                                className="mt-[15px] w-[80px] h-[50px] sm2:w-full bg-[#AD3C23] text-[32px] sm1:text-[24px] rounded-[5px] font-bold"
                                 onClick={() => {
                                     setFilteredClans([])
                                     setFilteredRanks([])
@@ -128,7 +128,7 @@ export function Filters() {
                             </button>
                         </ul>
 
-                        <div className="w-[168px] h-[230px] md1:w-[230px] bg-[#E99671] rounded-[5px] overflow-y-scroll pt-[16px] pb-[16px]">
+                        <div className="w-[168px] h-[230px] md1:w-[230px] bg-[#E99671] rounded-[5px] overflow-y-scroll ml-[10px] pt-[16px] pb-[16px]">
                             {listOpen === 0 && clans.map((clan, index) => {
                                 return (
                                     <div className="flex items-center pl-[14px] gap-[14px]" key={index}>
