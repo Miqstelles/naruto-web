@@ -77,17 +77,32 @@ export type Village = {
 }
 
 export const fetchCharacter = axios.create({
-    baseURL: "https://api.narutodb.xyz/character/"
+    baseURL: "https://narutodb.xyz/api/character",
+    headers: {
+        Accept: 'application/json',
+        'Access-Control-Allow-Origin': 'https://narutodb.xyz/api/clan',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+        'Access-Control-Request-Method': 'GET',
+    }
 })
 
 export const fetchClan = axios.create({
-    baseURL: "https://api.narutodb.xyz/clan/"
+    baseURL: "https://narutodb.xyz/api/clan",
+    headers: {
+        'Access-Control-Allow-Origin': "https://narutodb.xyz/api/clan"
+    }
 })
 
 export const fetchVillage = axios.create({
-    baseURL: "https://api.narutodb.xyz/village/"
+    baseURL: "https://narutodb.xyz/api/village",
+    headers: {
+        'Access-Control-Allow-Origin': "https://narutodb.xyz/api/village"
+    }
 })
 
 export const fetchTailedBeast = axios.create({
-    baseURL: "https://api.narutodb.xyz/tailed-beast/"
+    baseURL: "https://narutodb.xyz/api/tailed-beast",
+    headers: {
+        'Access-Control-Allow-Origin': "https://narutodb.xyz/api/tailed-beast"
+    }
 })
