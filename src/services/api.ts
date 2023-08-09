@@ -80,7 +80,7 @@ export const fetchCharacter = axios.create({
     baseURL: "https://narutodb.xyz/api/character",
     headers: {
         Accept: 'application/json',
-        'Access-Control-Allow-Origin': 'https://narutodb.xyz/api/clan',
+        'Access-Control-Allow-Origin': 'https://narutodb.xyz/api/character',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
         'Access-Control-Request-Method': 'GET',
     }
@@ -89,20 +89,26 @@ export const fetchCharacter = axios.create({
 export const fetchClan = axios.create({
     baseURL: "https://narutodb.xyz/api/clan",
     headers: {
-        'Access-Control-Allow-Origin': "https://narutodb.xyz/api/clan"
+        'Access-Control-Allow-Origin': "https://narutodb.xyz/api/clan",
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+        'Access-Control-Request-Method': 'GET',
     }
 })
 
 export const fetchVillage = axios.create({
     baseURL: "https://narutodb.xyz/api/village",
     headers: {
-        'Access-Control-Allow-Origin': "https://narutodb.xyz/api/village"
+        'Access-Control-Allow-Origin': "https://narutodb.xyz/api/village",
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+        'Access-Control-Request-Method': 'GET',
     }
 })
 
 export const fetchTailedBeast = axios.create({
     baseURL: "https://narutodb.xyz/api/tailed-beast",
     headers: {
-        'Access-Control-Allow-Origin': "https://narutodb.xyz/api/tailed-beast"
+        'Access-Control-Allow-Origin': "https://narutodb.xyz/api/tailed-beast",
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+        'Access-Control-Request-Method': 'GET',
     }
 })

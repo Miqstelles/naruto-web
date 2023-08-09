@@ -31,7 +31,7 @@ export function CharacterCard(props: pageProp) {
     useEffect(() => {
         setLoading(true)
 
-        fetchCharacter(`?page=1&limit=1424`)
+        fetchCharacter('?page=1&limit=1424')
             .then(response => setCharacters(response.data.characters))
             .catch(error => console.log(error))
         setCharacters([])
