@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Character, fetchCharacter } from "../../services/api";
+import { Character } from "../../services/api";
+import charactersData from '../../data/characters.json'
 import { Navbar } from "../../components/Header/Navbar";
 import { Footer } from "../../components/Footer/Footer";
 import { CaretRight } from "@phosphor-icons/react";
@@ -21,13 +22,11 @@ export function CharacterDetails() {
 
     useEffect(() => {
         setLoading(true)
-        fetchCharacter(`?page=${Number(id) + 1}&limit=1`)
-            .then(response => setCharacter(response.data.characters))
-            .catch(error => console.log(error))
-    })
+        setCharacter([charactersData[Number(id)]])
+    }, [loading])
 
     useEffect(() => {
-        character.length >= 1 ? setLoading(false) : setLoading(true)
+        character ? setLoading(false) : setLoading(true)
     })
 
     return (

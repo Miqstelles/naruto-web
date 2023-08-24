@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export type Character = {
     id: number;
     name: string;
@@ -67,44 +65,9 @@ export type Character = {
 };
 
 export type Clan = {
-    id: number;
     name: string;
-    characters: Character;
 }
 
 export type Village = {
     name: string;
 }
-
-export const fetchCharacter = axios.create({
-    baseURL: "https://narutodb.xyz/api/character",
-    headers: {
-        Accept: 'application/json',
-        'Access-Control-Allow-Origin': 'https://narutoweb.vercel.app',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    }
-})
-
-export const fetchClan = axios.create({
-    baseURL: "https://narutodb.xyz/api/clan",
-    headers: {
-        'Access-Control-Allow-Origin': "https://narutoweb.vercel.app",
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    }
-})
-
-export const fetchVillage = axios.create({
-    baseURL: "https://narutodb.xyz/api/village",
-    headers: {
-        'Access-Control-Allow-Origin': "https://narutoweb.vercel.app",
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    }
-})
-
-export const fetchTailedBeast = axios.create({
-    baseURL: "https://narutodb.xyz/api/tailed-beast",
-    headers: {
-        'Access-Control-Allow-Origin': "https://narutoweb.vercel.app",
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    }
-})

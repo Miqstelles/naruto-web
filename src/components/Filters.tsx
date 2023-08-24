@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Clan, Village, fetchClan, fetchVillage } from '../../src/services/api'
+import { Clan, Village } from '../../src/services/api'
+import clanData from '../../src/data/clans.json'
+import villageData from '../../src/data/villages.json'
 
 import { useDispatch } from 'react-redux';
 import { setFilteredItem } from "../redux/action";
@@ -20,15 +22,11 @@ export function Filters() {
     const { afiliaton } = useParams<{ afiliaton: any }>()
 
     useEffect(() => {
-        fetchClan(`?page=1&limit=58`)
-            .then(response => setClans(response.data.clans))
-            .catch(error => console.log(error))
+        setClans(clanData)
     }, [])
 
     useEffect(() => {
-        fetchVillage(`?page=1&limit=39`)
-            .then(response => setVillages(response.data.villages))
-            .catch(error => console.log(error))
+        setVillages(villageData)
     }, [])
 
     const dispatch = useDispatch()
@@ -79,7 +77,7 @@ export function Filters() {
         const combinedItems: any = [...filteredClans, ...filteredRanks, ...filteredKages, ...filteredVillages]
         location.pathname === '/TailedBeasts' && combinedItems.push(...tailedBeasts)
         afiliaton && combinedItems.push(afiliaton)
-        dispatch(setFilteredItem(combinedItems));
+        dispatch(setFilteredItem(combinedItems))
     }, [filteredClans, filteredRanks, filteredKages, filteredVillages, afiliaton])
 
     return (
@@ -138,7 +136,7 @@ export function Filters() {
                                         />
 
                                         <label className="font-MPLUS1CODE text-[16px] md1:text-[24px] text-white">
-                                            {clan.name.length >= 16 ? clan.name.substring(0, 7) + "..." : clan.name}
+                                            {clan.name}
                                         </label>
                                     </div>
                                 )

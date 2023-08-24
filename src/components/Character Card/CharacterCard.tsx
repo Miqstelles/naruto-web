@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
 
-import { fetchCharacter, Character } from '../../services/api'
+import { Character } from '../../services/api'
+import charactersData from '../../data/characters.json'
 import { CharacterInfoImg } from '../CharacterInfoImg'
 import { SkeletonCharacterCard } from '../Skeletons/SkeletonCharacterCard'
 
@@ -30,11 +31,7 @@ export function CharacterCard(props: pageProp) {
 
     useEffect(() => {
         setLoading(true)
-
-        fetchCharacter('?page=1&limit=1424')
-            .then(response => setCharacters(response.data.characters))
-            .catch(error => console.log(error))
-        setCharacters([])
+        setCharacters(charactersData)
 
     }, [filteredItems])
 
@@ -58,15 +55,15 @@ export function CharacterCard(props: pageProp) {
 
         if (filter === true && filteredItems.length > 0) {
             filtered = characters.filter((character) => {
-                const matchesClan = filteredItems.includes(character.personal.clan)
-                const matchesAfiliation = filteredItems.includes(character.personal.affiliation)
-                const matchesAfilliation = filteredItems.includes(character.personal.affiliation?.[1])
+                const matchesClan = filteredItems.includes(character.personal?.clan)
+                const matchesAfiliation = filteredItems.includes(character.personal?.affiliation)
+                const matchesAfilliation = filteredItems.includes(character.personal?.affiliation?.[1])
                 const matchesRankPartOne = filteredItems.includes(character.rank?.ninjaRank?.['Part I'])
                 const matchesRankPartTwo = filteredItems.includes(character.rank?.ninjaRank?.['Part II'])
                 const matchesRankGaiden = filteredItems.includes(character.rank?.ninjaRank?.['Gaiden'])
-                const matchesKages = filteredItems.includes(character.personal.occupation)
-                const matchesNaruto = filteredItems.includes(character.personal.occupation?.[0])
-                const matchesHashirama = filteredItems.includes(character.personal.occupation?.[1])
+                const matchesKages = filteredItems.includes(character.personal?.occupation)
+                const matchesNaruto = filteredItems.includes(character.personal?.occupation?.[0])
+                const matchesHashirama = filteredItems.includes(character.personal?.occupation?.[1])
                 const matchesTailedBeasts = filteredItems.includes(character.id)
                 return matchesClan || matchesAfiliation || matchesAfilliation || matchesRankPartOne || matchesRankPartTwo || matchesRankGaiden || matchesKages || matchesNaruto || matchesHashirama || matchesTailedBeasts
             })

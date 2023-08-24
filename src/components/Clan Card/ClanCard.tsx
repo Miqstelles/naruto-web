@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { fetchClan, Clan } from "../../services/api";
+import { Clan } from "../../services/api";
+import clanData from '../../data/clans.json';
 import { useEffect, useState } from "react";
 
 export function ClanCard() {
@@ -7,9 +8,7 @@ export function ClanCard() {
 
 
     useEffect(() => {
-        fetchClan(`?page=1&limit=58`)
-            .then(response => setClans(response.data.clans))
-            .catch(error => console.log(error))
+        setClans(clanData)
     })
 
 
