@@ -32,13 +32,14 @@ export function CharacterCard(props: pageProp) {
     useEffect(() => {
         setLoading(true)
         setCharacters(charactersData)
-
     }, [filteredItems])
 
     const [itemsData, setItemsData] = useState<Character[]>([])
 
     useEffect(() => {
-        itemsData.length > 0 ? setLoading(false) : setLoading(true)
+        setTimeout(() => {
+            itemsData.length > 0 ? setLoading(false) : setLoading(true)
+        }, 600)
     }, [itemsData])
 
     const currentPage = props.page
