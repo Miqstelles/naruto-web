@@ -38,7 +38,7 @@ export function CharacterCard(props: pageProp) {
 
     useEffect(() => {
         setTimeout(() => {
-            itemsData.length > 0 ? setLoading(false) : setLoading(true)
+            setLoading(false)
         }, 600)
     }, [itemsData])
 
@@ -92,7 +92,7 @@ export function CharacterCard(props: pageProp) {
                 )
             }
 
-            {!loading && currentItems.map(character => {
+            {charactersData && !loading && currentItems.map(character => {
                 const characterImg = character.images[character.images.length === 1 ? 0 : 1]?.replace(/\/revision\/.*$/, '')
 
                 const appearsLength = character && character.debut && character?.debut?.appearsIn?.length
